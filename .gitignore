@@ -1,0 +1,7 @@
+src/bin/
+src/obj/
+src/out/
+release/Dressmaker-Access/files/
+release/*.zip
+tools/*.py
+*.log
