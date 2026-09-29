@@ -126,6 +126,15 @@ namespace DressmakerAccess
                 case "timescale": Time.timeScale = float.Parse(a[1]); break;
                 case "back": Back.Backspace(); break;
                 case "escape": if (!Back.ClosePopup()) SingletonBehaviour<GameManager>.Instance.ShowHideOptions(); break;
+                case "sale":
+                    foreach (SellDressSummary sd in Resources.FindObjectsOfTypeAll<SellDressSummary>())
+                        if (sd.gameObject.scene.IsValid())
+                        {
+                            for (Transform up = sd.transform; up != null; up = up.parent) up.gameObject.SetActive(true);
+                            sd.ShowSaleSummary(new Dress.SaleDataItem { Materials = 90, Labour = 30, QualityBonusPercent = 5, PrestigeBonusPercent = 0, SellPrice = 126 }, null, null);
+                            break;
+                        }
+                    break;
                 case "pause": SingletonBehaviour<GameManager>.Instance.ShowHideOptions(); break;
                 case "palette":
                     foreach (ColorPicker cp in Resources.FindObjectsOfTypeAll<ColorPicker>())

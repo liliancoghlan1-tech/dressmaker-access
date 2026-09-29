@@ -1,6 +1,6 @@
 ====================================================================
  DRESSMAKER ACCESS  -  play Dressmaker with a screen reader
- Version 0.9.0 (beta)
+ Version 0.9.1 (beta)
 ====================================================================
 
 An unofficial accessibility mod for Dressmaker (Steam) that makes the

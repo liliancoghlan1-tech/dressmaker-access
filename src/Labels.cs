@@ -27,6 +27,8 @@ namespace DressmakerAccess
             string letter = Letters.Label(go);
             if (letter != null)
                 return letter;
+            if (go.name == "Continue" && TextWatch.SalePrice != null && go.GetComponentInParent<SellDressSummary>() != null)
+                return $"Sell for {TextWatch.SalePrice} gold";
             string opt = OptionLabel(go);
             if (opt != null)
                 return opt;

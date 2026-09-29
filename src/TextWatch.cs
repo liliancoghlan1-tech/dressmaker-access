@@ -30,7 +30,7 @@ namespace DressmakerAccess
                     continue;
                 // Tips and the colour picker / garment list announce themselves already.
                 if (root.GetComponent<TutorialMessage>() != null || root.GetComponent<ColorPicker>() != null
-                    || root.GetComponent<GarmentComponentSelectionUI>() != null)
+                    || root.GetComponent<GarmentComponentSelectionUI>() != null || root.GetComponent<SellDressSummary>() != null)
                     continue;
                 var photo = root.GetComponentInParent<PhotoScene>();
                 var gm = Rooms.GameManagerOrNull();
@@ -178,6 +178,23 @@ namespace DressmakerAccess
             {
                 if (__instance.gameObject.activeInHierarchy && line != null)
                     Speech.Queue(line.TextWithoutCharacterName.Text);
+            }
+        }
+
+        /// <summary>The price of the dress being sold, for the Sell button's label (null when not selling).</summary>
+        internal static int? SalePrice;
+
+        // The sale summary counts each line up one by one, so its text is empty when it opens;
+        // read the figures from the game's own sale data instead.
+        [HarmonyPatch(typeof(SellDressSummary), nameof(SellDressSummary.ShowSaleSummary))]
+        private static class SalePatch
+        {
+            private static void Prefix(Dress.SaleDataItem data)
+            {
+                SalePrice = data.SellPrice;
+                Speech.Queue($"Sell this dress for {data.SellPrice} gold? Materials {data.Materials} gold, labour {data.Labour} gold, " +
+                             $"quality bonus {data.QualityBonusPercent} percent, prestige bonus {data.PrestigeBonusPercent} percent. " +
+                             "Sell or Cancel; arrows to move, Enter to choose.");
             }
         }
 
