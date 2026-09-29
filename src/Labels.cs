@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using HarmonyLib;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DressmakerAccess
 {
@@ -22,6 +24,15 @@ namespace DressmakerAccess
                     return "New pattern: " + gc.PrettyName + (styles.Length > 0 ? ". " + styles : "");
                 }
             }
+            string letter = Letters.Label(go);
+            if (letter != null)
+                return letter;
+            string opt = OptionLabel(go);
+            if (opt != null)
+                return opt;
+            string filter = FilterLabel(go);
+            if (filter != null)
+                return filter;
             if ((go.name == "Export" || go.name == "Import") && go.GetComponentInParent<PhotoScene>() != null)
                 return go.name == "Export"
                     ? "Export: saves this dress design as a file on your computer. Opens a Windows save window; Escape there cancels"
@@ -72,6 +83,50 @@ namespace DressmakerAccess
                 return n + ", saved game" + (string.IsNullOrEmpty(rank) ? "" : ", " + rank);
             }
             return null;
+        }
+
+        /// <summary>The options menu: its sliders and switches have their names beside them, not inside.</summary>
+        private static string OptionLabel(GameObject go)
+        {
+            PauseMenu pm = go.GetComponentInParent<PauseMenu>();
+            if (pm == null)
+                return null;
+            var s = go.GetComponent<Slider>();
+            var t = go.GetComponent<Toggle>();
+            string on = t != null && t.isOn ? "checked" : "not checked";
+            if (s != null && s == pm.masterVolumeSlider)
+                return "Master volume: all the game's sound, music included. Slider " + UINav.SliderValue(s) + ", Left and Right change it";
+            if (s != null && s == pm.musicVolumeSlider)
+                return "Music volume: the music only. Slider " + UINav.SliderValue(s) + ", Left and Right change it";
+            if (t != null && t == pm.sewingAssistToggle)
+                return "Sewing assist: the machine steers each seam for you, " + on + ". F5 also switches it";
+            if (t != null && t == pm.rotationGizmoToggle)
+                return "Accessory rotation handle: a mouse handle for turning accessories on the dress; the mod doesn't need it, " + on;
+            // Arrow pairs: .../<Row>/Options/(Left|Right)
+            if ((go.name == "Left" || go.name == "Right") && go.transform.parent != null && go.transform.parent.parent != null)
+            {
+                string row = go.transform.parent.parent.name;
+                row = row == "FpsCap" ? "Frame limit" : row == "WindowMode" ? "Window mode" : row;
+                string value = UINav.TextOf(go.transform.parent.gameObject);
+                return row + ": " + (go.name == "Left" ? "previous" : "next") + " setting. Now " + value;
+            }
+            return null;
+        }
+
+        private static readonly AccessTools.FieldRef<FilterToggleButton, Color> FilterOnColour =
+            AccessTools.FieldRefAccess<FilterToggleButton, Color>("selectedColor");
+
+        /// <summary>Shop filters: say which group they're in and whether they're on.</summary>
+        private static string FilterLabel(GameObject go)
+        {
+            FilterToggleButton f = go.GetComponentInParent<FilterToggleButton>();
+            if (f == null || f.Button == null)
+                return null;
+            string name = f.gameObject.name;
+            string group = f.transform.parent != null && f.transform.parent.parent != null ? f.transform.parent.parent.name : "";
+            group = group == "FabricType" ? "Fabric type" : group == "ColorType" ? "Colour" : group == "Tag" ? "Style" : UINav.Prettify(group);
+            bool on = f.Button.colors.normalColor == FilterOnColour(f);
+            return (group.Length > 0 ? group + ": " : "") + name + ", " + (on ? "checked" : "not checked");
         }
 
         /// <summary>"Quality, 0/60, Professional, 0/40" -> a sentence that says what it measures.</summary>

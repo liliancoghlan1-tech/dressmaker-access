@@ -10,6 +10,7 @@ namespace DressmakerAccess
     ///     job - the tape, the shop shelf, a piece on the cutting table, sewing - say so).
     ///   Enter: choose.  H: help for this screen.  M: money, rank and your commission.
     ///   R: repeat (except while sewing, where R restarts the seam).  1-7: rooms.
+    ///   Backspace: close a popup or go Back; Escape closes a popup first, else the options.
     ///   F4 reads the whole screen; F5/F6 sewing assist and hum; F7 this room's details.
     /// </summary>
     internal static class Keys
@@ -39,6 +40,7 @@ namespace DressmakerAccess
             if (ShopAccess.HandleKeys(shift)) { ArrowFrame = Time.frameCount; return; }
             if (Cutting.HandleKeys(shift)) { ArrowFrame = Time.frameCount; return; }
 
+            if (Input.GetKeyDown(KeyCode.Backspace)) Back.Backspace();
             if (Input.GetKeyDown(KeyCode.H)) Screens.Help();
             if (Input.GetKeyDown(KeyCode.M)) Rooms.Status();
             if (Input.GetKeyDown(KeyCode.R) && !Sewing.InSeam) Speech.Say(Speech.Last);
@@ -99,6 +101,8 @@ namespace DressmakerAccess
             if (Sewing.TryCloseNote())
                 return;
             if (TryCloseTip())
+                return;
+            if (Letters.TryEnter())
                 return;
             var catcher = TextWatch.WaitingCatcher();
             if (catcher != null)

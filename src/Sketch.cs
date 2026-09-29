@@ -100,6 +100,8 @@ namespace DressmakerAccess
                 return txt;
             }
 
+            if (go.GetComponent<SketchbookPencil>() != null)
+                return "Pencil: colours in the drawing, for looks only. It doesn't change the fabric or the score; the dress takes its real colours from the fabric you cut";
             string colour = ColourLabel(go);
             if (colour != null)
                 return colour;
@@ -374,9 +376,28 @@ namespace DressmakerAccess
             return list;
         }
 
+        /// <summary>The game's 42 pencil colours, each with its own name (the grid has several blues, greys...).</summary>
+        private static readonly Dictionary<string, string> PaletteNames = new Dictionary<string, string>
+        {
+            ["EEE9D6"] = "cream", ["EFDEAD"] = "butter yellow", ["E4C99D"] = "sand beige", ["CCAB84"] = "tan",
+            ["BA6E4B"] = "terracotta, an orange brown", ["7E3F26"] = "chestnut brown", ["572E1B"] = "chocolate brown",
+            ["D5D5D5"] = "light grey", ["E9B7BC"] = "blush pink", ["E48E8E"] = "dusty rose pink", ["E98C76"] = "coral, a pinkish orange",
+            ["ECD667"] = "lemon yellow", ["ECB551"] = "marigold, a golden yellow", ["C3741E"] = "burnt orange",
+            ["AFB7C0"] = "silver grey", ["DB5E63"] = "strawberry red", ["AD332A"] = "brick red", ["720016"] = "burgundy, a deep wine red",
+            ["C1C37F"] = "pale olive green", ["9A9A2A"] = "olive green", ["494F00"] = "dark olive green",
+            ["8B8E9F"] = "slate grey, a bluish grey", ["CB7BBF"] = "orchid pink", ["B94682"] = "raspberry pink", ["7B1452"] = "plum",
+            ["99BC85"] = "sage green", ["6FA14B"] = "leaf green", ["2F5B21"] = "forest green", ["4C4B59"] = "charcoal grey",
+            ["978ABF"] = "lavender", ["5E4790"] = "violet", ["3C2373"] = "deep purple",
+            ["90C3B8"] = "seafoam, a pale blue green", ["54A48F"] = "jade green", ["205956"] = "dark teal", ["1C1B1D"] = "black",
+            ["4D5DB6"] = "periwinkle blue", ["1C3284"] = "royal blue", ["0D2E5B"] = "navy blue", ["67B4DD"] = "sky blue",
+            ["508ED1"] = "cornflower blue", ["1B497B"] = "denim blue",
+        };
+
         /// <summary>A plain-English name for a colour swatch.</summary>
         internal static string ColourName(Color c)
         {
+            if (PaletteNames.TryGetValue(ColorUtility.ToHtmlStringRGB(c), out string named))
+                return named;
             Color.RGBToHSV(c, out float h, out float s, out float v);
             if (v < 0.15f) return "black";
             if (s < 0.12f)
@@ -402,7 +423,7 @@ namespace DressmakerAccess
                     picker.rectTransform.anchoredPosition = Vector2.zero;
                     Canvas.ForceUpdateCanvases();
                 }
-                Speech.Say("Colour picker. Tab through the colours; Enter picks one. Then Tab again for places to colour on the sketch. The pencil only colours the drawing, not the fabric.");
+                Speech.Say("Colour picker. Tab through the colours; Enter picks one. Then Tab again for places to colour on the sketch. The pencil only colours the drawing; it doesn't change the fabric or the score.");
             }
         }
 

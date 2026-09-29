@@ -11,7 +11,7 @@ namespace DressmakerAccess
         private const string Everywhere =
             "Everywhere: arrows or Tab move, Enter chooses. H is this help, M tells you your money and commission, R repeats. " +
             "Number keys go to rooms: 1 front desk, 2 measuring, 3 sketchbook, 4 fabric shop, 5 cutting table, 6 mannequin, 7 sewing machine. " +
-            "F4 reads everything on screen. F7 gives this room's details.";
+            "Backspace closes a popup or goes back; Escape closes a popup, or opens the options. F4 reads everything on screen. F7 gives this room's details.";
 
         /// <summary>Spoken just after the room name when you arrive.</summary>
         internal static string Intro(GameManager.Scene s)

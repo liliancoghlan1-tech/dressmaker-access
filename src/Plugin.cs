@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DressmakerAccess
 {
-    [BepInPlugin("lilian.dressmakeraccess", "Dressmaker Access", "0.9.0")]
+    [BepInPlugin("lilian.dressmakeraccess", "Dressmaker Access", "0.9.1")]
     public class Plugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -77,6 +77,7 @@ namespace DressmakerAccess
                 Measuring.Tick();
                 Cutting.Tick();
                 Rooms.Tick();
+                Letters.Update();
             }
             catch (Exception e)
             {

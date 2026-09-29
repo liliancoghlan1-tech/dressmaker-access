@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Framework;
 using UnityEngine;
 
 namespace DressmakerAccess
@@ -123,6 +124,29 @@ namespace DressmakerAccess
                     Plugin.Log.LogInfo("[cmd] screenshot -> " + shot);
                     break;
                 case "timescale": Time.timeScale = float.Parse(a[1]); break;
+                case "back": Back.Backspace(); break;
+                case "escape": if (!Back.ClosePopup()) SingletonBehaviour<GameManager>.Instance.ShowHideOptions(); break;
+                case "pause": SingletonBehaviour<GameManager>.Instance.ShowHideOptions(); break;
+                case "palette":
+                    foreach (ColorPicker cp in Resources.FindObjectsOfTypeAll<ColorPicker>())
+                    {
+                        if (!cp.gameObject.scene.IsValid()) continue;
+                        int n = 0;
+                        foreach (Color c in cp.Colours)
+                        {
+                            Color.RGBToHSV(c, out float h, out float s, out float v);
+                            Plugin.Log.LogInfo($"[palette] {++n} #{ColorUtility.ToHtmlStringRGB(c)} h={h * 360:0} s={s:0.00} v={v:0.00} -> {Sketch.ColourName(c)}");
+                        }
+                    }
+                    break;
+                case "knight": SingletonBehaviour<KnighthoodScene>.Instance.ShowKnighthoodEnvelope(); break;
+                case "gossip":
+                    // gossip [index]: show one of the game's newspaper pages
+                    var reports = ScriptableEnum.GetValueList<GossipReportDefinition>();
+                    int gi = a.Length > 1 ? int.Parse(a[1]) : 0;
+                    Plugin.Log.LogInfo("[cmd] gossip reports: " + string.Join(", ", System.Linq.Enumerable.Select(reports, r => r.name)));
+                    SingletonBehaviour<FrontDesk>.Instance.RequestGossipReport(reports[gi]);
+                    break;
                 default: Plugin.Log.LogInfo("[cmd] unknown"); break;
             }
         }

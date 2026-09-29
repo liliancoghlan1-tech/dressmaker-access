@@ -325,7 +325,7 @@ namespace DressmakerAccess
             return name.Length == 0 ? "button" : name;
         }
 
-        private static string SliderValue(Slider s)
+        internal static string SliderValue(Slider s)
         {
             float range = s.maxValue - s.minValue;
             if (range <= 0)

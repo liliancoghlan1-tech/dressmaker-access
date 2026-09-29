@@ -51,6 +51,11 @@ framework in place.
                               3 sketchbook, 4 fabric shop, 5 cutting
                               table, 6 mannequin, 7 sewing machine
                               (rooms the game hasn't opened yet stay shut)
+  Backspace                   close a popup, list or the options, or
+                              go Back from a room (at the cutting
+                              table it puts a held piece back)
+  Escape                      close a popup; with none open, the
+                              game's options menu as usual
   F4                          read everything on the screen
   F7                          this room's details
   F5 / F6                     sewing assist on/off / steering hum on/off
