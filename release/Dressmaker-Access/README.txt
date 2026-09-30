@@ -1,6 +1,6 @@
 ====================================================================
  DRESSMAKER ACCESS  -  play Dressmaker with a screen reader
- Version 0.9.1 (beta)
+ Version 0.9.2 (beta)
 ====================================================================
 
 An unofficial accessibility mod for Dressmaker (Steam) that makes the
@@ -39,7 +39,12 @@ framework in place.
  KEYS YOU CAN USE EVERYWHERE
 --------------------------------------------------------------------
 
-  Arrows or Tab / Shift Tab   move through what's on screen
+  Arrows or Tab / Shift Tab   move through what's on screen: first the
+                              room itself, then the sidebar, then Back
+                              and Settings
+  S                           jump between the room and the sidebar,
+                              back to where you were in each (not at
+                              the sewing machine, where S is the game's)
   Enter                       choose
   H                           help: what this screen is, and its keys
   M                           your money, rank, the client's wishes,
@@ -105,6 +110,15 @@ Fabrics in the sidebar: Enter puts a swatch on the sketch so its styles
 count in the estimate. T reads how your design meets the client's
 wishes. Draft Pattern finishes the design.
 
+Page Up and Page Down turn the sketchbook's pages, and each page says
+what it is. From front to back: the friendship book (your clients),
+your finished dresses, the dresses in progress (commissions and
+off-the-rack designs, "2 of 3" and so on), and, once the game unlocks
+it, a page for starting a new off-the-rack design. The dress in
+progress you turn to is the one you then work on in every room, so you
+can start your own design while a commission waits, and come back to
+it. M says which dress you're on.
+
 The "Your dress so far" box scores the REAL dress as you cut and sew
 it, so it starts at zero; the estimate while designing is T.
 
@@ -157,6 +171,8 @@ Patterns tab: Enter on a cut piece puts it in its place on the body.
 When neighbouring pieces are on, "Sew seam" items appear in the list,
 with where the seam is ("your left", "on the back"); Enter starts it.
 Seams are always started from here, not from the sewing table.
+S jumps between the mannequin (its seams) and the sidebar (the pieces
+and accessories). After putting a piece on, Tab goes to the next one.
 
 Accessories tab: Enter picks an accessory up. Then:
   - buttons, bows, flowers...: choose a piece of the dress, then a spot

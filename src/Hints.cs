@@ -46,6 +46,7 @@ namespace DressmakerAccess
                 if (m.Contains("tag")) return " Press T to hear them.";
                 if (m.Contains("draft")) return " With the mod: Tab to Draft Pattern.";
                 if (m.Contains("find a design")) return " Press T to check how you're doing.";
+                if (m.Contains("non commissioned") || m.Contains("new dress")) return " With the mod: Page Down to the last page, or Tab to New Dress, then Create New Dress.";
             }
             return "";
         }

@@ -82,6 +82,15 @@ namespace DressmakerAccess
                 }
             }
 
+            if (go.name == "bookmark" && go.transform.parent != null && go.transform.parent.name == "NewDress")
+                return "Bookmark: back to the dress in progress";
+            if (go.transform.parent != null && go.transform.parent.name == "NavTabs")
+            {
+                if (go.name == "FriendshipButton") return "Friendship book tab";
+                if (go.name == "ActiveDressButton") return "Dress in progress tab";
+                if (go.name == "NewDressButton") return "New off-the-rack design tab";
+            }
+
             var gcb = go.GetComponent<GarmentComponentUIButton>();
             if (gcb != null && gcb.garmentComponent != null)
             {

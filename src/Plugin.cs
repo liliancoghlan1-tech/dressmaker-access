@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DressmakerAccess
 {
-    [BepInPlugin("lilian.dressmakeraccess", "Dressmaker Access", "0.9.1")]
+    [BepInPlugin("lilian.dressmakeraccess", "Dressmaker Access", "0.9.2")]
     public class Plugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;

@@ -70,6 +70,7 @@ namespace DressmakerAccess
                 case "styles": Sketch.SayStyles(); break;
                 case "screen": TextWatch.ReadScreen(); break;
                 case "dump": UINav.Dump(); break;
+                case "unlockrack": UnlockRackPatch.On = true; break;
                 case "dumpall": UINav.DumpAll(); break;
                 case "progress": Sewing.SayProgress(); break;
                 case "assist": Sewing.ToggleAssist(); break;

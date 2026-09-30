@@ -79,3 +79,14 @@ namespace DressmakerAccess
         }
     }
 }
+
+namespace DressmakerAccess
+{
+    /// <summary>Test command "unlockrack": pretend off-the-rack designs are unlocked (test copy only, not saved).</summary>
+    [HarmonyPatch(typeof(GameManager), nameof(GameManager.IsNoncommissionedDressesUnlocked), MethodType.Getter)]
+    internal static class UnlockRackPatch
+    {
+        internal static bool On;
+        private static void Postfix(ref bool __result) { if (On) __result = true; }
+    }
+}

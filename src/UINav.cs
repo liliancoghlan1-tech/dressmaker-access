@@ -25,6 +25,110 @@ namespace DressmakerAccess
             public Vector2 Screen;
             public string Label;
             public Action OnActivate;
+            public int Area;
+        }
+
+        // ---------- areas ----------
+        // Each screen is split into areas: the room's own work (the mannequin, the sketch,
+        // the cutting table), the sidebar, and the Back and Settings buttons. The list goes
+        // through them in that order; S swaps between the room and the sidebar, back to where you were.
+
+        internal const int WorkArea = 0, SidebarArea = 1, ControlsArea = 2;
+
+        private static int AreaOf(GameObject go)
+        {
+            if (go.name == "BackButton" || (go.name == "Settings" && go.transform.parent != null && go.transform.parent.name == "Sidebar"))
+                return ControlsArea;
+            for (Transform t = go.transform; t != null; t = t.parent)
+                if (t.name == "Sidebar" || t.GetComponent<SidebarInventory>() != null)
+                    return SidebarArea;
+            return WorkArea;
+        }
+
+        internal static string AreaName(int area)
+        {
+            if (area == SidebarArea) return "Sidebar";
+            if (area == ControlsArea) return "Back and Settings";
+            var gm = Rooms.GameManagerOrNull();
+            switch (gm != null ? gm.CurrentScene : (GameManager.Scene)(-1))
+            {
+                case GameManager.Scene.Mannequin: return "The mannequin";
+                case GameManager.Scene.Sketchbook: return "The sketchbook page";
+                case GameManager.Scene.CuttingRoom: return "The cutting table";
+                case GameManager.Scene.Store: return "The shop";
+                case GameManager.Scene.Photo: return "The photo studio";
+            }
+            return "The room";
+        }
+
+        /// <summary>Where you last were in each area, so S brings you back to it.</summary>
+        private static readonly Dictionary<int, (GameObject go, Vector2 screen)> _areaSpot = new Dictionary<int, (GameObject, Vector2)>();
+        private static int _currentArea = -1;
+        private static GameManager.Scene _areaScene = (GameManager.Scene)(-1);
+
+        private static void ForgetAreasOnNewScreen()
+        {
+            var gm = Rooms.GameManagerOrNull();
+            var scene = gm != null ? gm.CurrentScene : (GameManager.Scene)(-1);
+            if (scene == _areaScene) return;
+            _areaScene = scene;
+            _areaSpot.Clear();
+            _currentArea = -1;
+            _current = null; // a new room starts at the top, even if the sidebar is the same object
+
+        }
+
+        /// <summary>S: jump to the other area (Shift+S the previous one, when there are more).</summary>
+        internal static void SwitchArea(int dir)
+        {
+            ForgetAreasOnNewScreen();
+            ShopAccess.ShelfFocused = false;
+            _items = Gather();
+            var areas = _items.Select(i => i.Area).Distinct().ToList();
+            // Back and Settings stay at the end of the Tab list (Backspace and Escape do those
+            // anyway), so S just goes back and forth between the room and the sidebar.
+            if (areas.Count(a => a != ControlsArea) >= 2)
+                areas.Remove(ControlsArea);
+            if (areas.Count < 2)
+            {
+                Speech.Say(_items.Count == 0 ? "Nothing to select here." : "There's only one area here.");
+                return;
+            }
+            // Nowhere yet counts as being in the first area, so S goes straight to the sidebar.
+            int ai = Math.Max(0, areas.IndexOf(_currentArea));
+            int target = areas[(ai + dir + areas.Count) % areas.Count];
+            var inArea = Enumerable.Range(0, _items.Count).Where(i => _items[i].Area == target).ToList();
+            int pick = -1;
+            if (_areaSpot.TryGetValue(target, out var spot))
+            {
+                pick = inArea.Where(i => _items[i].Go == spot.go).OrderBy(i => (_items[i].Screen - spot.screen).sqrMagnitude).DefaultIfEmpty(-1).First();
+                if (pick < 0)
+                    pick = Nearest(inArea, spot.screen);
+            }
+            if (pick < 0)
+            {
+                // First time in: start on the first thing in a list (the pieces, the fabrics), not the tabs above it.
+                pick = inArea.Where(i => InScrollList(_items[i].Go)).DefaultIfEmpty(inArea[0]).First();
+            }
+            Focus(_items[pick], pick, announceArea: true);
+        }
+
+        private static bool InScrollList(GameObject go)
+        {
+            ScrollRect sr = go.GetComponentInParent<ScrollRect>();
+            return sr != null && sr.content != null && go.transform.IsChildOf(sr.content);
+        }
+
+        private static int Nearest(List<int> indices, Vector2 screen)
+        {
+            int best = -1;
+            float bd = float.MaxValue;
+            foreach (int i in indices)
+            {
+                float d = (_items[i].Screen - screen).sqrMagnitude;
+                if (d < bd) { bd = d; best = i; }
+            }
+            return best;
         }
 
         /// <summary>Selectables inside these components are listed by a feature module instead.</summary>
@@ -124,8 +228,10 @@ namespace DressmakerAccess
                 }
             }
 
-            // Reading order: rows top to bottom (20px bands), then left to right.
-            list = list.OrderByDescending(i => Mathf.Round(i.Screen.y / 20f)).ThenBy(i => i.Screen.x).ToList();
+            // Area by area, and in each: rows top to bottom (20px bands), then left to right.
+            foreach (Item i in list)
+                i.Area = AreaOf(i.Go);
+            list = list.OrderBy(i => i.Area).ThenByDescending(i => Mathf.Round(i.Screen.y / 20f)).ThenBy(i => i.Screen.x).ToList();
             foreach (Item i in list)
                 if (i.Label == null)
                     i.Label = Describe(i);
@@ -346,11 +452,19 @@ namespace DressmakerAccess
                 Speech.Say("Nothing to select here.");
                 return;
             }
+            ForgetAreasOnNewScreen();
             int idx = _current == null ? -1 : IndexOf(_items, _current, _currentScreen);
-            if (idx < 0)
-                idx = dir > 0 ? 0 : _items.Count - 1;
-            else
+            if (idx >= 0)
                 idx = (idx + dir + _items.Count) % _items.Count;
+            else if (_current != null && _currentArea >= 0 && _items.Any(x => x.Area == _currentArea))
+            {
+                // What you were on is gone (a piece you just put on the mannequin): carry on
+                // from its spot, where the next one has moved up.
+                int near = Nearest(Enumerable.Range(0, _items.Count).Where(i => _items[i].Area == _currentArea).ToList(), _currentScreen);
+                idx = dir > 0 ? near : (near - 1 + _items.Count) % _items.Count;
+            }
+            else
+                idx = dir > 0 ? 0 : _items.Count - 1;
             Focus(_items[idx], idx);
         }
 
@@ -379,15 +493,21 @@ namespace DressmakerAccess
             Focus(_items[0], 0);
         }
 
-        private static void Focus(Item it, int idx)
+        private static void Focus(Item it, int idx, bool announceArea = false)
         {
+            ForgetAreasOnNewScreen();
             ScrollIntoView(it.Go);
             TryScreenPoint(it.Go, out Vector2 after);
             if (it.OnActivate == null) it.Screen = after;
+            // Say the area's name on moving into a different one (only if the screen has several).
+            bool several = _items.Any(x => x.Area != it.Area);
+            string area = several && (announceArea || it.Area != _currentArea) ? AreaName(it.Area) + ". " : "";
             _current = it.Go;
             _currentScreen = it.Screen;
+            _currentArea = it.Area;
+            _areaSpot[it.Area] = (it.Go, it.Screen);
             Hover(it.Go);
-            Speech.Say($"{it.Label}. {idx + 1} of {_items.Count}");
+            Speech.Say($"{area}{it.Label}. {idx + 1} of {_items.Count}");
         }
 
         internal static GameObject Current => _current != null && _current.activeInHierarchy ? _current : null;

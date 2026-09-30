@@ -175,10 +175,17 @@ namespace DressmakerAccess
                 if (q != null && q.questDefinition != null)
                 {
                     QuestDefinition d = q.questDefinition;
-                    sb.Append("Commission: ").Append(d.PrettyName);
-                    if (d.questGiverCharacter != null)
-                        sb.Append(", for ").Append(d.CharacterName);
-                    sb.Append(". ");
+                    if (d == QuestDefinition.RepeatingQuest)
+                        sb.Append("Working on an off-the-rack design of your own, to sell. ");
+                    else
+                    {
+                        sb.Append(SketchPages.Kind(q)).Append(": ").Append(d.PrettyName);
+                        if (d.questGiverCharacter != null)
+                            sb.Append(", for ").Append(d.CharacterName);
+                        sb.Append(". ");
+                    }
+                    if (p.activeCommissions.Count > 1)
+                        sb.Append($"Dress {p.activeCommissionIndex + 1} of {p.activeCommissions.Count} in progress; switch with Page Up and Page Down in the sketchbook. ");
                     string req = Speech.Clean(d.GetRequirementsString().Replace("\n", ". "));
                     var dress = gm.activeDress;
                     if (dress != null)

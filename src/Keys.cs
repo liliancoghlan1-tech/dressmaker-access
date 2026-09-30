@@ -11,6 +11,8 @@ namespace DressmakerAccess
     ///   Enter: choose.  H: help for this screen.  M: money, rank and your commission.
     ///   R: repeat (except while sewing, where R restarts the seam).  1-7: rooms.
     ///   Backspace: close a popup or go Back; Escape closes a popup first, else the options.
+    ///   S: jump between the room and the sidebar.
+    ///   Page Up / Page Down: turn the sketchbook's pages.
     ///   F4 reads the whole screen; F5/F6 sewing assist and hum; F7 this room's details.
     /// </summary>
     internal static class Keys
@@ -45,6 +47,13 @@ namespace DressmakerAccess
             if (Input.GetKeyDown(KeyCode.M)) Rooms.Status();
             if (Input.GetKeyDown(KeyCode.R) && !Sewing.InSeam) Speech.Say(Speech.Last);
             if (Input.GetKeyDown(KeyCode.T) && Sketch.Book != null) Sketch.SayStyles();
+            if (Input.GetKeyDown(KeyCode.PageUp) && SketchPages.Turn(-1)) return;
+            if (Input.GetKeyDown(KeyCode.PageDown) && SketchPages.Turn(1)) return;
+            // S jumps between the room's own work and the sidebar.
+            // (At the sewing machine the game uses S itself.)
+            if (Input.GetKeyDown(KeyCode.S) && !Dialogue.OptionsActive && !Dialogue.LineActive
+                && Rooms.GameManagerOrNull()?.CurrentScene != GameManager.Scene.Sewing)
+                UINav.SwitchArea(shift ? -1 : 1);
 
             if (Input.GetKeyDown(KeyCode.Tab))
                 Do(shift ? "prev" : "next");
@@ -85,6 +94,10 @@ namespace DressmakerAccess
                 case "next": UINav.Move(1); return;
                 case "prev": UINav.Move(-1); return;
                 case "enter": Enter(); return;
+                case "area": UINav.SwitchArea(1); return;
+                case "areaback": UINav.SwitchArea(-1); return;
+                case "pageup": SketchPages.Turn(-1); return;
+                case "pagedown": SketchPages.Turn(1); return;
             }
             if (action.Length == 1 && char.IsDigit(action[0]))
             {
