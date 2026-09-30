@@ -32,6 +32,9 @@ namespace DressmakerAccess
             string opt = OptionLabel(go);
             if (opt != null)
                 return opt;
+            string sidebarFilter = SidebarFilter.Label(go);
+            if (sidebarFilter != null)
+                return sidebarFilter;
             string filter = FilterLabel(go);
             if (filter != null)
                 return filter;

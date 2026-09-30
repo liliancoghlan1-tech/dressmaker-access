@@ -699,6 +699,16 @@ namespace DressmakerAccess
             {
                 if (Room != null || Rooms.GameManagerOrNull()?.CurrentScene == GameManager.Scene.Mannequin)
                     Speech.Queue(tab + " tab.");
+                // In any room: warn when the sidebar filter has emptied (or thinned) this list.
+                SidebarInventory inv = SingletonBehaviour<SidebarInventory>.Instance;
+                GameManager.Scene? scene = Rooms.GameManagerOrNull()?.CurrentScene;
+                if (inv != null && (scene == GameManager.Scene.Sketchbook || scene == GameManager.Scene.CuttingRoom
+                                    || scene == GameManager.Scene.Mannequin || scene == GameManager.Scene.Store))
+                {
+                    string shown = SidebarFilter.Shown(inv, tab, false);
+                    if (shown != null)
+                        Speech.Queue(shown);
+                }
             }
         }
     }
