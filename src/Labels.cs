@@ -29,6 +29,15 @@ namespace DressmakerAccess
                 return letter;
             if (go.name == "Continue" && TextWatch.SalePrice != null && go.GetComponentInParent<SellDressSummary>() != null)
                 return $"Sell for {TextWatch.SalePrice} gold";
+            string photo = PhotoAccess.Label(go);
+            if (photo != null)
+                return photo;
+            var person = go.GetComponent<ContactListPersonItem>();
+            if (person != null)
+                return DressInfo.PersonLabel(person);
+            var history = go.GetComponentInParent<DressHistoryItemUI>();
+            if (history != null)
+                return (UINav.TextOf(history.gameObject).TrimEnd('.') + ". Enter opens this dress").Replace(".. ", ". ");
             string opt = OptionLabel(go);
             if (opt != null)
                 return opt;
@@ -81,7 +90,7 @@ namespace DressmakerAccess
             {
                 string n = "Slot " + (slot.slot + 1);
                 if (slot.deleteButton != null && (go == slot.deleteButton || go.transform.IsChildOf(slot.deleteButton.transform)))
-                    return "Delete " + n;
+                    return "Delete the saved game in " + n.ToLowerInvariant();
                 if (!slot.Occupied)
                     return n + ", empty, start a new game";
                 string rank = slot.rankText != null ? Speech.Clean(slot.rankText.text) : "";
@@ -147,6 +156,33 @@ namespace DressmakerAccess
             }
             sb.Append("This scores the real dress as you cut and sew it, so it starts at zero; while designing, press T in the sketchbook for the estimate.");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Items that should come straight after another one instead of in screen order:
+        /// each save slot's Delete button sits above the slots, so it would be read first.
+        /// </summary>
+        internal static GameObject ComesAfter(GameObject go)
+        {
+            var slot = go.GetComponentInParent<SaveSlotButton>();
+            if (slot != null && slot.deleteButton != null && (go == slot.deleteButton || go.transform.IsChildOf(slot.deleteButton.transform)))
+                return slot.gameObject;
+            return null;
+        }
+
+        /// <summary>
+        /// Pages read one after the other rather than row by row across both: in the friendship
+        /// book, the list of people (left page) comes before the person's page (right).
+        /// </summary>
+        internal static int Column(GameObject go)
+        {
+            Sketchbook b = Sketch.Book;
+            if (b == null || SketchPages.SectionName(b) != "Rolodex")
+                return 0;
+            for (Transform t = go.transform; t != null; t = t.parent)
+                if (t.name.StartsWith("RightPage"))
+                    return 1;
+            return 0;
         }
 
         /// <summary>Elements the mod drives with its own keys; keep them out of the Tab list.</summary>

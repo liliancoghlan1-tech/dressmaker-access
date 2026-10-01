@@ -11,7 +11,7 @@ namespace DressmakerAccess
     ///   Enter: choose.  H: help for this screen.  M: money, rank and your commission.
     ///   R: repeat (except while sewing, where R restarts the seam).  1-7: rooms.
     ///   Backspace: close a popup or go Back; Escape closes a popup first, else the options.
-    ///   S: jump between the room and the sidebar.
+    ///   S or F9: jump between the room and the sidebar (F9 works in every room, S not in the shop or at the machine).
     ///   Page Up / Page Down: turn the sketchbook's pages.
     ///   F4 reads the whole screen; F5/F6 sewing assist and hum; F7 this room's details.
     /// </summary>
@@ -36,6 +36,13 @@ namespace DressmakerAccess
 
             if (UINav.EditingText)
                 return;
+
+            // F9 also jumps between the room and the sidebar, in every room (S is a shelf letter in the shop).
+            if (Input.GetKeyDown(KeyCode.F9) && !Dialogue.OptionsActive && !Dialogue.LineActive)
+            {
+                UINav.SwitchArea(shift ? -1 : 1);
+                return;
+            }
 
             // Room-specific keys first (they return true if they used the key).
             if (Measuring.HandleKeys(shift)) { ArrowFrame = Time.frameCount; return; }

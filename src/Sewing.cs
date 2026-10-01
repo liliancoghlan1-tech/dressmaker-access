@@ -53,6 +53,7 @@ namespace DressmakerAccess
             UINav.ExtraSources.Add(Sketch.ListCloseItem);
             UINav.ExtraSources.Add(AccessoryAccess.Items);
             UINav.ExtraSources.Add(Cutting.TableItems);
+            UINav.ExtraSources.Add(DressInfo.PageItems);
         }
 
         private static SewingController Controller

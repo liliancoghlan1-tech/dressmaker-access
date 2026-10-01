@@ -51,6 +51,8 @@ namespace DressmakerAccess
             return true;
         }
 
+        internal static string SectionName(Sketchbook b) => Section(b);
+
         private static string Section(Sketchbook b) => Traverse.Create(b).Field("_viewingSection").GetValue()?.ToString();
 
         internal static string Kind(QuestState q)
@@ -77,14 +79,14 @@ namespace DressmakerAccess
             switch (Section(b))
             {
                 case "Rolodex":
-                    return "Friendship book: your clients, how well you know them, and the dresses you've made for them. Page Down for your dresses.";
+                    return "Friendship book: your clients, how well you know them, and the dresses you've made for them. Tab to a person and press Enter to read their page. Page Down for your dresses.";
                 case "OldDresses":
                 {
                     int i = OldIndex(b);
                     if (i < 0 || i >= pp.completedQuests.Count)
                         return "Finished dresses.";
                     QuestState q = pp.completedQuests[i];
-                    return $"Finished dress {i + 1} of {pp.completedQuests.Count}. {Kind(q)}{Title(q)}. F4 reads the page.";
+                    return $"Finished dress {i + 1} of {pp.completedQuests.Count}. {Kind(q)}{Title(q)}. Arrows or Tab read the dress line by line.";
                 }
                 case "WipZone":
                 {
@@ -110,7 +112,17 @@ namespace DressmakerAccess
             yield return null; // Show() fills the page title after drawing it
             Sketchbook b = Sketch.Book;
             if (b != null)
+            {
                 Speech.Say(Describe(b));
+                // Arriving by a page turn leaves nobody chosen (the tab chooses the first person):
+                // choose them the same way, so the right page shows a person, not empty frames.
+                if (Section(b) == "Rolodex" && Traverse.Create(b).Field("_lastSelectedCharacter").GetValue<CharacterDefinition>() == null)
+                {
+                    var people = Traverse.Create(b).Field("personButtons").GetValue<System.Collections.Generic.List<ContactListPersonItem>>();
+                    if (people != null && people.Count > 0 && people[0].OnClicked != null)
+                        people[0].OnClicked(people[0].forCharacter);
+                }
+            }
         }
 
         // Anything that turns the page: Page Up/Down, the tabs, a dress in the friendship book.

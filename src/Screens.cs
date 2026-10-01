@@ -9,7 +9,7 @@ namespace DressmakerAccess
     internal static class Screens
     {
         private const string Everywhere =
-            "Everywhere: arrows or Tab move, Enter chooses. S jumps between the room and the sidebar, back to where you were in each. H is this help, M tells you your money and commission, R repeats. " +
+            "Everywhere: arrows or Tab move, Enter chooses. S or F9 jumps between the room and the sidebar, back to where you were in each; in the fabric shop use F9, as S jumps along the shelf. H is this help, M tells you your money and commission, R repeats. " +
             "Number keys go to rooms: 1 front desk, 2 measuring, 3 sketchbook, 4 fabric shop, 5 cutting table, 6 mannequin, 7 sewing machine. " +
             "Backspace closes a popup or goes back; Escape closes a popup, or opens the options. F4 reads everything on screen. F7 gives this room's details.";
 
@@ -27,7 +27,7 @@ namespace DressmakerAccess
                 case GameManager.Scene.CuttingRoom:
                     return "Choose a fabric, then lay out and cut your pattern pieces. H for the keys.";
                 case GameManager.Scene.Mannequin:
-                    return "Enter on a pattern piece puts it on the mannequin; seams ready to sew appear in the list. S jumps between the mannequin and the sidebar. H for help.";
+                    return "Enter on a pattern piece puts it on the mannequin; seams ready to sew appear in the list. S or F9 jumps between the mannequin and the sidebar. H for help.";
                 case GameManager.Scene.Photo:
                     return "Take a photo of your dress, then hand it over. Arrows move, Enter chooses. H for help.";
                 case GameManager.Scene.Sewing:
@@ -67,7 +67,7 @@ namespace DressmakerAccess
                            "Pieces on the fabric are in the list; Enter picks one up. X trims off the fabric you've used so more unrolls. Shift Backspace puts all cut pieces back. F7 says what's on the table.";
                 case GameManager.Scene.Mannequin:
                     return "Mannequin. Patterns tab: Enter on a cut piece puts it in its place on the body. When two neighbouring pieces are on, their seam appears in the list as Sew seam; Enter starts sewing it. " +
-                           "Seam Rip undoes a seam. The Accessories tab is for trims and buttons. S jumps between the mannequin, with its seams, and the sidebar, with the pieces and accessories; it remembers where you were in each.";
+                           "Seam Rip undoes a seam. The Accessories tab is for trims and buttons. S or F9 jumps between the mannequin, with its seams, and the sidebar, with the pieces and accessories; it remembers where you were in each.";
                 case GameManager.Scene.Sewing:
                     return "Sewing machine. Hold Space to sew. Up and Down change speed. With sewing assist on, the machine steers for you. " +
                            "With it off, Left and Right arrows steer: a hum sounds from the side to steer towards, and gets higher as you near the edge; silence means you're on course. " +

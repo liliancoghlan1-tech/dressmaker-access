@@ -125,6 +125,10 @@ namespace DressmakerAccess
                     Plugin.Log.LogInfo("[cmd] screenshot -> " + shot);
                     break;
                 case "timescale": Time.timeScale = float.Parse(a[1]); break;
+                case "dumpvariants": DevDump.Variants(); break;
+                case "dumpphoto": DevDump.Photo(); break;
+                case "scene": SingletonBehaviour<GameManager>.Instance.SetScene((GameManager.Scene)Enum.Parse(typeof(GameManager.Scene), a[1]), true); break;
+                case "nextenv": UnityEngine.Object.FindAnyObjectByType<PhotoScene>().NextEnvironment(); break;
                 case "back": Back.Backspace(); break;
                 case "escape": if (!Back.ClosePopup()) SingletonBehaviour<GameManager>.Instance.ShowHideOptions(); break;
                 case "sale":

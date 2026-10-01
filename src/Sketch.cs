@@ -64,14 +64,18 @@ namespace DressmakerAccess
                 if (variation)
                 {
                     var vs = p.GetComponentInChildren<VariantSelector>(true);
+                    GarmentComponent gcNow = CurrentPart(part);
                     string of = vs != null ? $" {VariantSelected(vs) + 1} of {VariantCount(vs)}" : "";
+                    string note = vs != null ? DressInfo.Variant(gcNow, VariantSelected(vs), withNumber: false) : "";
+                    if (note.Length > 0) of += ": " + note;
                     if (go.name == "Left") return $"Previous {part} style. Now style{of}";
                     if (go.name == "Right") return $"Next {part} style. Now style{of}";
                     if (go.name.StartsWith("VariantDot"))
                     {
                         int i = go.transform.GetSiblingIndex() + 1;
                         bool sel = vs != null && VariantSelected(vs) + 1 == i;
-                        return $"{Cap(part)} style {i}{(sel ? ", selected" : "")}";
+                        string dotNote = DressInfo.Variant(gcNow, i - 1, withNumber: false);
+                        return $"{Cap(part)} style {i}{(dotNote.Length > 0 ? ": " + dotNote : "")}{(sel ? ", selected" : "")}";
                     }
                 }
                 if (component)
@@ -82,13 +86,20 @@ namespace DressmakerAccess
                 }
             }
 
+            if (go.name == "bookmark" && go.transform.parent != null && go.transform.parent.name == "OldDresses")
+                return "Bookmark: back to the dress in progress";
+            if (go.name == "Dress" && go.transform.parent != null && go.transform.parent.name == "OldDressRightPage")
+                return "Picture of the dress. The lines at the top of the list describe it";
+            if (go.name == "EnterPhotoMode")
+                return "Photo Mode: take a new photo of this dress in the photo studio";
             if (go.name == "bookmark" && go.transform.parent != null && go.transform.parent.name == "NewDress")
                 return "Bookmark: back to the dress in progress";
             if (go.transform.parent != null && go.transform.parent.name == "NavTabs")
             {
-                if (go.name == "FriendshipButton") return "Friendship book tab";
-                if (go.name == "ActiveDressButton") return "Dress in progress tab";
-                if (go.name == "NewDressButton") return "New off-the-rack design tab";
+                string section = Book != null ? SketchPages.SectionName(Book) : "";
+                if (go.name == "FriendshipButton") return "Friendship book tab" + (section == "Rolodex" ? ", selected" : "");
+                if (go.name == "ActiveDressButton") return "Dress in progress tab" + (section == "WipZone" ? ", selected" : "");
+                if (go.name == "NewDressButton") return "New off-the-rack design tab" + (section == "NewDress" ? ", selected" : "");
             }
 
             var gcb = go.GetComponent<GarmentComponentUIButton>();
@@ -120,6 +131,8 @@ namespace DressmakerAccess
                 return InventoryLabel(inv);
 
             var swatch = go.GetComponent<SketchbookFabric>();
+            if (swatch != null && Book != null && Book.fabricSamplesOldDress.Contains(swatch))
+                return "Swatch pinned to this design: " + SwatchName(swatch);
             if (swatch != null && Book != null && Book.fabricSamplesDraft.Contains(swatch))
                 return "Swatch on the sketch: " + SwatchName(swatch) + ". Enter removes it";
 
@@ -130,6 +143,16 @@ namespace DressmakerAccess
         }
 
         private static string Cap(string s) => s.Length == 0 ? s : char.ToUpper(s[0]) + s.Substring(1);
+
+        private static GarmentComponent CurrentPart(string part)
+        {
+            Sketchbook b;
+            try { b = SingletonBehaviour<Sketchbook>.Instance; } catch { return null; }
+            return part == "bodice" ? (GarmentComponent)b.SelectedBodice
+                : part == "sleeves" ? b.SelectedSleeve
+                : part == "collar" ? (GarmentComponent)b.SelectedCollar
+                : b.SelectedSkirt;
+        }
 
         private static string CurrentName(string part)
         {

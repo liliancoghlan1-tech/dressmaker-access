@@ -231,7 +231,18 @@ namespace DressmakerAccess
             // Area by area, and in each: rows top to bottom (20px bands), then left to right.
             foreach (Item i in list)
                 i.Area = AreaOf(i.Go);
-            list = list.OrderBy(i => i.Area).ThenByDescending(i => Mathf.Round(i.Screen.y / 20f)).ThenBy(i => i.Screen.x).ToList();
+            list = list.OrderBy(i => i.Area).ThenBy(i => Labels.Column(i.Go)).ThenByDescending(i => Mathf.Round(i.Screen.y / 20f)).ThenBy(i => i.Screen.x).ToList();
+            // Then move items that belong right after another (a save slot's Delete after its slot).
+            foreach (Item it in list.ToList())
+            {
+                GameObject after = Labels.ComesAfter(it.Go);
+                if (after == null) continue;
+                int target = list.FindIndex(x => x.Go == after);
+                if (target < 0) continue;
+                list.Remove(it);
+                target = list.FindIndex(x => x.Go == after);
+                list.Insert(target + 1, it);
+            }
             foreach (Item i in list)
                 if (i.Label == null)
                     i.Label = Describe(i);

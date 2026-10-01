@@ -42,9 +42,11 @@ framework in place.
   Arrows or Tab / Shift Tab   move through what's on screen: first the
                               room itself, then the sidebar, then Back
                               and Settings
-  S                           jump between the room and the sidebar,
-                              back to where you were in each (not at
-                              the sewing machine, where S is the game's)
+  S or F9                     jump between the room and the sidebar,
+                              back to where you were in each. F9 works
+                              in every room; S doesn't in the fabric
+                              shop (it jumps along the shelf) or at the
+                              sewing machine (where S is the game's)
   Enter                       choose
   H                           help: what this screen is, and its keys
   M                           your money, rank, the client's wishes,
@@ -109,6 +111,9 @@ ones your client wants first); the last item closes the list.
 Fabrics in the sidebar: Enter puts a swatch on the sketch so its styles
 count in the estimate. T reads how your design meets the client's
 wishes. Draft Pattern finishes the design.
+Many bodices, skirts, sleeves and collars come in two to four styles
+(the game only shows dots). Each style says how it differs, for
+example "style 2 of 2: adds a waistband" or "mirrored".
 
 Page Up and Page Down turn the sketchbook's pages, and each page says
 what it is. From front to back: the friendship book (your clients),
@@ -117,7 +122,18 @@ off-the-rack designs, "2 of 3" and so on), and, once the game unlocks
 it, a page for starting a new off-the-rack design. The dress in
 progress you turn to is the one you then work on in every room, so you
 can start your own design while a commission waits, and come back to
-it. M says which dress you're on.
+it. M says which dress you're on. The tabs say "selected" on the page
+you're on.
+
+A finished dress is read as lines you can arrow through: the client,
+the summary, the score, then each part (bodice, skirt, collar,
+sleeves) with its style, fabrics and colours, then the accessories.
+Photo Mode there takes a new photo of it.
+
+In the friendship book, Enter on a person reads their page: friendship
+stars, measurements, the styles they like that you've learnt, and how
+many dresses you've made for them. Those dresses are listed after the
+page; Enter opens one.
 
 The "Your dress so far" box scores the REAL dress as you cut and sew
 it, so it starts at zero; the estimate while designing is T.
@@ -171,7 +187,7 @@ Patterns tab: Enter on a cut piece puts it in its place on the body.
 When neighbouring pieces are on, "Sew seam" items appear in the list,
 with where the seam is ("your left", "on the back"); Enter starts it.
 Seams are always started from here, not from the sewing table.
-S jumps between the mannequin (its seams) and the sidebar (the pieces
+S or F9 jumps between the mannequin (its seams) and the sidebar (the pieces
 and accessories). After putting a piece on, Tab goes to the next one.
 
 Accessories tab: Enter picks an accessory up. Then:
@@ -204,7 +220,10 @@ and speed. Going off the line rewinds to your last good stitch.
  PHOTO STUDIO AND HANDING OVER
 --------------------------------------------------------------------
 
-Camera buttons move the view a little per press. Take Photo, then
+Camera buttons move the view a little per press. Each backdrop is
+described (library, marble staircase, sunflower meadow...) and each
+light colour is named (warm white, soft pink, cool blue...). Take
+Photo, then
 choose Complete Commission to hand the dress over (or Keep working, or
 Sell). "Save" in that dialog is optional: it saves the photo as a
 picture file and opens a Windows save window (Escape cancels). Export
@@ -219,8 +238,7 @@ see them.
 
   - Gossip newspaper and letters: text is read, page turning untested.
   - Selling or gifting a dress instead of handing it over: untested.
-  - Free designs with no client, the friendship pages, past dresses,
-    the mannequin colour picker, filter popups, the options sliders:
+  - Free designs with no client, the mannequin colour picker:
     untested.
   - Late game and the ending: never reached yet.
   - Colouring the sketch with the pencil lands in the wrong places.
