@@ -648,7 +648,12 @@ namespace DressmakerAccess
                     FabricPiece fp = room.GetCurrentDisplayedFabricPiece();
                     if (fp != null) used = $" Fabric used from this roll so far: {Usage(room).UsedLength:0.00} metres.";
                 }
-                Speech.Say($"Cut out {p.DisplayName}. Grain {Mathf.RoundToInt(p.GrainQuality)} percent." + used + " " +
+                // A cut piece has nothing left to do on the table, and the mannequin only lists
+                // pieces that went back to the sidebar (mouse players right-click them off).
+                // Left on the table, it silently blocks the dress from ever being finished.
+                if (room != null && p.IsWorld3D)
+                    room.StartCoroutine((IEnumerator)ReturnAnim.Invoke(room, new object[] { p }));
+                Speech.Say($"Cut out {p.DisplayName}, it's gone to the sidebar. Grain {Mathf.RoundToInt(p.GrainQuality)} percent." + used + " " +
                            (left == 0 ? "Every piece is cut! Next, press 6 for the mannequin to put the pieces on and sew them." : $"{left} {(left == 1 ? "piece" : "pieces")} left to cut."));
             }
         }
@@ -689,6 +694,32 @@ namespace DressmakerAccess
                 FabricPiece fp = __instance.GetCurrentDisplayedFabricPiece();
                 if (fp != null && Room != null)
                     Speech.Say($"On the table: {fp.fabric.PrettyName}, {fp.length:0.00} metres.");
+            }
+        }
+
+        /// <summary>
+        /// Safety net: cut pieces still lying on the cutting table don't show at the mannequin,
+        /// so the dress can never be finished. Bring them over when the mannequin opens.
+        /// </summary>
+        [HarmonyPatch(typeof(SidebarInventory), "OnSceneChange")]
+        private static class StrandedPiecesPatch
+        {
+            private static void Prefix(GameManager.Scene newScene)
+            {
+                if (newScene != GameManager.Scene.Mannequin) return;
+                Dress d = SingletonBehaviour<GameManager>.Instance?.activeDress;
+                if (d == null) return;
+                int n = 0;
+                foreach (PatternPanel p in d.PanelPieces)
+                {
+                    if (p.HasBeenCut && !p.VisibleOnMannequin && p.lastPlacedOn != null && !p.beingCut)
+                    {
+                        p.ShowRepresentation2D();
+                        n++;
+                    }
+                }
+                if (n > 0)
+                    Speech.Queue($"Brought {n} cut {(n == 1 ? "piece" : "pieces")} over from the cutting table.");
             }
         }
 

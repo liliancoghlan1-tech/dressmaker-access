@@ -73,5 +73,18 @@ namespace DressmakerAccess
                        (left > 0 ? $"{left} more {(left == 1 ? "piece" : "pieces")} in the sidebar. " : "All pieces are on. ") +
                        (seams > 0 ? $"{seams} {(seams == 1 ? "seam" : "seams")} ready to sew in the Tab list." : ""));
         }
+
+        /// <summary>The game's Finish Dress prompt pops up silently once every seam is sewn.</summary>
+        [HarmonyPatch(typeof(MannequinScene), "Show")]
+        private static class FinishPromptPatch
+        {
+            private static void Postfix()
+            {
+                GameManager gm = Rooms.GameManagerOrNull();
+                if (gm != null && !gm.isInIntro && gm.CurrentDressSewingComplete)
+                    Speech.Queue("Every seam is sewn! Finish Dress is now first in the Tab list. It takes the dress to the photo studio to hand it in, "
+                               + "so put any accessories on before you choose it.");
+            }
+        }
     }
 }
