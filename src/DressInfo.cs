@@ -67,16 +67,16 @@ namespace DressmakerAccess
             // Skirts
             { "Apron Skirt", new[] { "two gathered ruffles at the hem", "an apron-shaped panel over the front, with one ruffle at the hem" } },
             { "Bow Ballgown Skirt", new[] { "a big bow with long tails at one hip", "mirrored: the bow at the other hip" } },
-            { "Circle Skirt", new[] { "long", "short, about knee length" } },
-            { "Coat Dress Skirt", new[] { "long", "shorter" } },
-            { "Flare Skirt", new[] { "long", "shorter" } },
+            { "Circle Skirt", new[] { "longer", "shorter" } },
+            { "Coat Dress Skirt", new[] { "longer", "shorter" } },
+            { "Flare Skirt", new[] { "longer", "shorter" } },
             { "Kaftan Skirt", new[] { "the front opening to one side", "mirrored: the opening to the other side" } },
             { "Koi Skirt", new[] { "a cascade of ruffles down one side", "mirrored: the cascade down the other side" } },
             { "Mermaid Skirt", new[] { "the flare grows out of the skirt's own panels", "a separate flounce, joined by a seam around the knees" } },
-            { "Mother of Pearl Skirt", new[] { "long", "short" } },
+            { "Mother of Pearl Skirt", new[] { "longer", "shorter" } },
             { "Poinsetta Skirt", new[] { "pointed petal panels near the hem", "adds a band across the middle, and a second row edging the petal points" } },
             { "Scalloped Skirt", new[] { "scallops cut into the hem of the panels", "a separate row of scalloped pieces at the hem" } },
-            { "Straight Gathered Tiered Skirt", new[] { "long, in three tiers", "shorter, in three tiers" } },
+            { "Straight Gathered Tiered Skirt", new[] { "longer", "shorter" } },
             { "Tulip Hip Skirt", new[] { "plain", "adds bows with long tails on both hips" } },
             { "Wavecrest Skirt", new[] { "tiered ruffles down one side", "mirrored: the ruffles down the other side" } },
             { "Wrap Skirt", new[] { "wraps across, opening to one side, no tie", "the same with a bow tie at the waist", "wraps the other way, with a bow tie", "wraps the other way, no tie" } },
@@ -102,7 +102,36 @@ namespace DressmakerAccess
         {
             if (gc == null) return null;
             string v = Variant(gc, variant);
-            return gc.PrettyName + (v.Length > 0 ? ", " + v : "");
+            string look = Look(gc, variant);
+            return gc.PrettyName + (v.Length > 0 ? ", " + v : "") + (look.Length > 0 ? ". " + look : "");
+        }
+
+        /// <summary>How the part looks (from its sketch), plus a skirt's length from where its hem sits on the mannequin.</summary>
+        internal static string Look(GarmentComponent gc, int variant = 0)
+        {
+            if (gc == null) return "";
+            PartLooks.Looks.TryGetValue(gc.type + "/" + gc.name, out string look);
+            string len = gc.type == GarmentComponent.Type.Skirt ? SkirtLength(gc, variant) : null;
+            if (len != null) look = look == null ? Cap(len) : look + "; " + len;
+            return look ?? "";
+        }
+
+        private static string Cap(string s) => s.Length == 0 ? s : char.ToUpper(s[0]) + s.Substring(1);
+
+        // The waist sits at 1.2 on the mannequin, the floor at 0.
+        private static string SkirtLength(GarmentComponent gc, int variant)
+        {
+            if (gc.variations == null || gc.variations.Count == 0) return null;
+            float bottom = float.MaxValue;
+            foreach (var p in gc.GetVariant(variant).panels)
+                if (p.mannequinMesh != null) bottom = Mathf.Min(bottom, p.mannequinMesh.bounds.min.y);
+            if (bottom == float.MaxValue) return null;
+            return bottom > 0.65f ? "short, above the knee"
+                 : bottom > 0.45f ? "knee length"
+                 : bottom > 0.30f ? "just below the knee"
+                 : bottom > 0.18f ? "mid-calf length"
+                 : bottom > 0.05f ? "ankle length"
+                 : "floor length";
         }
 
         // ---------- a finished dress, line by line ----------

@@ -127,6 +127,8 @@ namespace DressmakerAccess
                 case "timescale": Time.timeScale = float.Parse(a[1]); break;
                 case "dumpvariants": DevDump.Variants(); break;
                 case "dumpphoto": DevDump.Photo(); break;
+                case "catalogue": DevDump.Catalogue(); break;
+                case "skirts": DevDump.SkirtLengths(); break;
                 case "scene": SingletonBehaviour<GameManager>.Instance.SetScene((GameManager.Scene)Enum.Parse(typeof(GameManager.Scene), a[1]), true); break;
                 case "nextenv": UnityEngine.Object.FindAnyObjectByType<PhotoScene>().NextEnvironment(); break;
                 case "back": Back.Backspace(); break;

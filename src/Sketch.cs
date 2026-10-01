@@ -80,9 +80,12 @@ namespace DressmakerAccess
                 }
                 if (component)
                 {
-                    if (go.name == "Left") return $"Previous {part}. Now {current}";
-                    if (go.name == "Right") return $"Next {part}. Now {current}";
-                    if (go.name == "TitleHolder") return $"{Cap(part)}: {current}. Choose from a list";
+                    var vsel = p.GetComponentInChildren<VariantSelector>(false);
+                    string look = DressInfo.Look(CurrentPart(part), vsel != null ? VariantSelected(vsel) : 0);
+                    look = look.Length > 0 ? ". " + look : "";
+                    if (go.name == "Left") return $"Previous {part}. Now {current}{look}";
+                    if (go.name == "Right") return $"Next {part}. Now {current}{look}";
+                    if (go.name == "TitleHolder") return $"{Cap(part)}: {current}{look}. Choose from a list";
                 }
             }
 
@@ -110,7 +113,8 @@ namespace DressmakerAccess
                 bool current = sb != null && (gc == (GarmentComponent)sb.SelectedBodice || gc == (GarmentComponent)sb.SelectedSkirt
                                               || gc == (GarmentComponent)sb.SelectedSleeve || gc == (GarmentComponent)sb.SelectedCollar);
                 string styles = ShopAccess.Styles(gc.additiveTags, 3);
-                return gc.PrettyName + (current ? ", your current one" : "") + (styles.Length > 0 ? ". " + styles : "");
+                string look = DressInfo.Look(gc);
+                return gc.PrettyName + (current ? ", your current one" : "") + (look.Length > 0 ? ". " + look : "") + (styles.Length > 0 ? ". " + styles : "");
             }
             if (go.name == "Spawn" && go.transform.parent != null && go.transform.parent.name == "RightPageDraft")
             {

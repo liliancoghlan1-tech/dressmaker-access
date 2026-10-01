@@ -21,7 +21,8 @@ namespace DressmakerAccess
                 if (gc != null)
                 {
                     string styles = ShopAccess.Styles(gc.additiveTags, 3);
-                    return "New pattern: " + gc.PrettyName + (styles.Length > 0 ? ". " + styles : "");
+                    string look = DressInfo.Look(gc);
+                    return "New pattern: " + gc.PrettyName + (look.Length > 0 ? ". " + look : "") + (styles.Length > 0 ? ". " + styles : "");
                 }
             }
             string letter = Letters.Label(go);

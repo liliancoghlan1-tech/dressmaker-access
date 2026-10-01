@@ -17,20 +17,46 @@ namespace DressmakerAccess
             }
         }
 
-        internal static void SavePng(Texture tex, string file)
+        internal static void SavePng(Texture tex, string file, Rect? part = null)
         {
             if (tex == null) return;
             var rt = RenderTexture.GetTemporary(tex.width, tex.height, 0, RenderTextureFormat.ARGB32);
             Graphics.Blit(tex, rt);
             var prev = RenderTexture.active;
             RenderTexture.active = rt;
-            var t2 = new Texture2D(tex.width, tex.height, TextureFormat.RGBA32, false);
-            t2.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
+            Rect r = part ?? new Rect(0, 0, tex.width, tex.height);
+            var t2 = new Texture2D((int)r.width, (int)r.height, TextureFormat.RGBA32, false);
+            t2.ReadPixels(r, 0, 0);
             t2.Apply();
             RenderTexture.active = prev;
             RenderTexture.ReleaseTemporary(rt);
-            File.WriteAllBytes(Path.Combine(Dir, file), t2.EncodeToPNG());
+            string path = Path.Combine(Dir, file);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllBytes(path, t2.EncodeToPNG());
             Object.Destroy(t2);
+        }
+
+        private static string Safe(string s) => string.Join("_", s.Split(Path.GetInvalidFileNameChars()));
+
+        /// <summary>Every part's first sketch, every fabric's texture, every accessory's icon, plus their notes.</summary>
+        internal static void Catalogue()
+        {
+            foreach (GarmentComponent gc in Resources.FindObjectsOfTypeAll<GarmentComponent>().OrderBy(g => g.type.ToString()).ThenBy(g => g.name))
+            {
+                if (gc.variations == null || gc.variations.Count == 0) continue;
+                Plugin.Log.LogInfo($"[cat] part|{gc.type}|{gc.name}|{gc.PrettyName}|{(gc.notes ?? "").Replace("\n", " ")}");
+                SavePng(gc.variations[0].sketchedSprite, $"parts/{gc.type}_{Safe(gc.name)}.png");
+            }
+            foreach (Fabric f in Resources.FindObjectsOfTypeAll<Fabric>().OrderBy(x => x.name))
+            {
+                Plugin.Log.LogInfo($"[cat] fabric|{f.name}|{f.PrettyName}|{(f.fabricType != null ? f.fabricType.name : "")}|{string.Join(",", f.colors)}|{(f.notes ?? "").Replace("\n", " ")}");
+                SavePng(f.texture, $"fabrics/{Safe(f.name)}.png");
+            }
+            foreach (AccessoryDefinition a in Resources.FindObjectsOfTypeAll<AccessoryDefinition>().OrderBy(x => x.name))
+            {
+                Plugin.Log.LogInfo($"[cat] acc|{a.name}|{a.PrettyName}|{(a.notes ?? "").Replace("\n", " ")}");
+                if (a.icon != null) SavePng(a.icon.texture, $"acc/{Safe(a.name)}.png", a.icon.textureRect);
+            }
         }
 
         internal static void Variants()
@@ -49,6 +75,18 @@ namespace DressmakerAccess
                     SavePng(v.sketchedSprite, $"{gc.type}_{gc.name}_v{i + 1}.png");
                 }
             }
+        }
+
+        internal static void SkirtLengths()
+        {
+            foreach (GarmentComponent gc in Resources.FindObjectsOfTypeAll<GarmentComponent>().Where(g => g.type == GarmentComponent.Type.Skirt).OrderBy(g => g.name))
+                for (int i = 0; i < gc.variations.Count; i++)
+                {
+                    var b = gc.variations[i].panels.Where(p => p.mannequinMesh != null).Select(p => p.mannequinMesh.bounds).ToList();
+                    if (b.Count == 0) continue;
+                    float top = b.Max(x => x.max.y), bottom = b.Min(x => x.min.y);
+                    Plugin.Log.LogInfo($"[skirt] {gc.name} v{i + 1} top={top:0.00} bottom={bottom:0.00} len={top - bottom:0.00}");
+                }
         }
 
         internal static void Photo()
