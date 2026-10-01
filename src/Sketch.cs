@@ -177,7 +177,8 @@ namespace DressmakerAccess
             if (inv.FabricPiece != null && inv.FabricPiece.fabric != null)
             {
                 Fabric f = inv.FabricPiece.fabric;
-                return $"{f.PrettyName}, {inv.FabricPiece.length:0.##} metres. {FabricStyles(f)}";
+                string look = DressInfo.FabricLook(f);
+                return $"{f.PrettyName}, {inv.FabricPiece.length:0.##} metres. {(look.Length > 0 ? look + ". " : "")}{FabricStyles(f)}";
             }
             if (inv.Accessory != null)
             {

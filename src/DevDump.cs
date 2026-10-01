@@ -50,7 +50,17 @@ namespace DressmakerAccess
             foreach (Fabric f in Resources.FindObjectsOfTypeAll<Fabric>().OrderBy(x => x.name))
             {
                 Plugin.Log.LogInfo($"[cat] fabric|{f.name}|{f.PrettyName}|{(f.fabricType != null ? f.fabricType.name : "")}|{string.Join(",", f.colors)}|{(f.notes ?? "").Replace("\n", " ")}");
-                SavePng(f.texture, $"fabrics/{Safe(f.name)}.png");
+                Texture tex = f.texture;
+                if (tex == null && f.material != null)
+                {
+                    tex = f.material.mainTexture;
+                    if (tex == null)
+                        foreach (string prop in f.material.GetTexturePropertyNames())
+                            if ((tex = f.material.GetTexture(prop)) != null) break;
+                }
+                if (tex == null && f.material != null)
+                    Plugin.Log.LogInfo($"[cat] notex|{f.name}|{f.material.shader.name}|{f.material.color}");
+                SavePng(tex, $"fabrics/{Safe(f.name)}.png");
             }
             foreach (AccessoryDefinition a in Resources.FindObjectsOfTypeAll<AccessoryDefinition>().OrderBy(x => x.name))
             {

@@ -1,0 +1,227 @@
+# How each patterned fabric looks, written from the game's own textures (dump/fabsheets). Shown name|description
+# Fabrics whose names already say it (plain colours, linen, velvet...) are left out on purpose.
+Houndstooth Red|Bold red and white houndstooth check
+Blue Pansy Gradient Silk|Fades from navy at one end through sky blue and yellow to orange
+Heron Migration Printed Cotton|Large dark grey herons with spread wings, flying on a cream background
+Sanguine Smoke Gradient Silk|Fades from pale grey through deep blood red to near black
+Sea Witch Gradient Silk|Fades from black through deep purple to soft lavender
+Brandished Copper Gradient Silk|Fades from sage green through cream to copper and rust brown
+Carmilla Gradient Silk|Fades from pale grey through dusky pink to deep red
+Brown Argyle|Argyle diamonds in taupe and dark teal on beige, crossed by thin red lines
+Sunset Gradient Silk|Fades from deep navy through purple and hot pink to orange
+Radishing Cotton Print|Carrots, radishes, beetroot and leafy greens scattered on a pale yellow background
+Ruby Embroidered Diamond Cotton|Shimmering white embroidery of diamonds, flowers and twisted cords on deep red
+Protea Gradient Sequins|Fades from pale pink through dusky rose to dark burgundy
+Meadow Flower Gradient Silk|Fades from dark green through sage to pale pink and raspberry
+Rows of Pink Peonies Embroidered Cotton|Rows of embroidered magenta peonies with teal leaves, on winding brown vines over cream
+Gingham Blue Cotton|Blue and white gingham check
+Grey-Dient Silk|Fades from black through grey to pale silver
+Fairy Floss Gradient Silk|Fades from red through pink and purple to deep navy
+Purple Floral Abstract Print Cotton|Cream daisies and curling leaves all over a purple background
+Terracotta Floral Abstract Print Cotton|Cream daisies and curling leaves all over a terracotta background
+Blue Floral Abstract Print Cotton|Cream daisies and curling leaves all over a blue background
+Red French Lace|Lace of swirling, curling leaves and scrolls over a fine net
+Blue Flame Gradient Silk|Fades from deep navy through purple and red to golden orange
+Gingham Green Cotton|Sage green and white gingham check
+Grey and Green Argyle|Argyle diamonds in olive and dark green on grey-beige, crossed by thin purple lines
+Gingham Warm Black Cotton|Dark brown and tan gingham check
+Royal Blue Lace|Lace of swirling, curling leaves and scrolls over a fine net
+Royal Purple Lace|Lace of swirling, curling leaves and scrolls over a fine net
+Desaturated Liberty Floral Cotton|Small, densely packed flowers in muted lilac, sage and cream on a dark grey background
+Red Forget Me Not Cotton Print|Tiny red, yellow and lilac wild flowers on trailing green stems, on off-white
+Orange Liberty Floral Cotton|Small, densely packed flowers in orange, peach and pink on an olive background
+Meadow Gingham Cotton|Olive and cream gingham check
+Blossoms on Midnight Embroidered Cotton|Bands of embroidered pink and orange blossoms with gold borders, across a midnight black background
+Paisley Purple Silk|Large, swirling paisley in pink, aqua and lilac on a dark grey-purple background
+Repeating Marigolds Cotton|Large stylised navy flowers on green stems, spaced out on a bright orange background
+Spring Bouquet Cotton Print|Sprays of pink roses, orange berries, white daisies and ferns on cream
+Whimsy Ditsy Cotton Print|Pink, yellow, orange and blue flowers with leaves, scattered on pale duck-egg blue
+Capricorn Burnout Velvet|Burnout velvet: a dark grey pattern of goats, fans and scrolls on black
+Eclectic Winter Scallop Embroidered Cotton|Dense folk embroidery of tiny flowers, scallops and diamonds in cream, red and gold on navy
+Blue Argyle|Argyle diamonds in slate and navy blue on grey, crossed by thin brown lines
+Scandinavian Flowers Cotton|Simple folk-style red tulips on teal stems, spaced out on mustard yellow
+Continuous Botanical Cotton|Large, flowing sage-green leaves with a few gold and pink flowers on cream
+Pastel Sunrise Gradient Silk|Fades from pale lilac through dusky pink to soft orange
+Radioactive Gradient Silk|Fades from near black through dark teal to bright jade green
+Strawberry Thief Cotton Print|Rows of rabbits and strawberries on cream, between bands of pink zigzag
+Desert Dawn Gradient Sequins|Fades from sandy gold through mauve to dark brown
+Orchil Floral Silk|A scattered pattern of teardrop petals and curls
+Indigo Patrice Pattern Silk|A scattered pattern of teardrop petals and curls
+Amethyst Purple Floral Silk|A scattered pattern of teardrop petals and curls
+Frangipani Gradient Silk|Fades from soft periwinkle blue through white to pale yellow
+Blue Kaleidoscope Embroidered Cotton|Tile-like kaleidoscope medallions in teal, blue and purple on dark green
+Friends of a Feather Cotton Print|Geese, ducks and hens with little flower sprigs on pale cream
+Strawberry Fields Simple Cotton|Watercolour strawberries on curling green vines, on soft pink
+Pink Kaleidoscope Embroidered Cotton|Tile-like kaleidoscope medallions in pink, aqua and grey on dark plum
+Red Kaleidoscope Embroidered Cotton|Tile-like kaleidoscope medallions in red, orange and olive on dark brown
+Swirling Citrine Embellished Silk|Embellished with circles of tiny dots, swirling over each other all over
+Styx Sequins|Sequins laid in swirling circles of tiny dots
+Sanguine Dreams Sequins|Sequins laid in swirling circles of tiny dots
+Dante Swirling Sequins|Sequins laid in swirling circles of tiny dots
+Mica Sequin|Sequins laid in swirling circles of tiny dots
+Light Floral Classic Silk|Brown scrolling leaves and curls on pale gold
+Parrot Fish Gradient Silk|Fades from magenta through royal blue and teal to dark green
+Celeste Cotton|Golden starbursts, like suns and fireworks, on a dark brown background
+Desert Rain Embellished Silk|Stripes of sage, rust and dark green, with fine rows of beads
+Undine Gradient Sequins|Fades from olive green through slate blue to navy
+Jellyfish Gradient Sequins|Fades from teal through near black to deep burgundy
+Golden Dawn Gradient Silk|Fades from soft peach through orange to rust red
+Green Plaid|Dark green tartan with lines of sage and mustard
+Paisley Red Silk|Large, swirling paisley in red, pink and cream on dusky purple
+Forget Me Not Continuous Cotton|Small blue forget-me-nots on trailing green stems, on pale cream
+Alexandria Printed Velvet|Large dark olive flowers and leaves printed on a sage green background
+Water Lily Gradient Silk|Fades from olive green to teal
+Stalactite Sequins|Rows of round sequins in pastel pink, mint and yellow
+Peacock Sequin|Rows of round sequins in pastel pink, mint and yellow
+Black Wool Pinstripes|Dark charcoal wool with fine pinstripes
+Dahlia Damask Burnout Velvet|Burnout velvet: a large dark purple damask of dahlias and scrolls on lilac grey
+Midnight Garden Cotton Print|Dense small flowers in red, cream and blue among green leaves, on near black
+Black Leaf Print Silk|Large grey feathery leaves printed on charcoal
+Rustic Diamond Embroidered Cotton|Cream embroidered diamonds of dots and small flower medallions on deep brick red
+Red Plaid|Rust red and brown tartan with tan lines
+Checkered Ochre Cotton|Large windowpane check in ochre, tan and caramel
+Green Kaleidoscope Embroidered Cotton|Tile-like kaleidoscope medallions in olive, teal and grey on dark charcoal green
+Red Swirling Serpent Cotton Print|Golden serpents coiling among leaves and lilies on deep plum red
+Artemis Gradient Sequins|Fades from slate grey through mauve to dusky red
+Autumnal Vine Border Printed Cotton|Plain warm beige, with bands of red and blue vines along the edges
+Pelagic Gradient Silk|Fades from deep navy to soft aqua blue
+Aphrodite Gradient Silk|Fades from dusty rose through mauve to dark plum
+Snowflake Gradient Silk|Fades from silver grey through ice blue to cornflower blue
+Medusa Burnout Velvet|Burnout velvet: dark olive serpents and lilies on a grey-green background
+Crimson Geometric Floral Velvet|Dusky pink stylised lilies and flowers in rows on deep crimson brown
+Rainbow Magic Check|A patchwork check of small squares in muted rainbow colours: rust, olive, mustard, slate and rose
+Rainbow Gradient Sequins|Fades from coral through orange and gold to sage green
+Green Floral Burnout Velvet|Burnout velvet: an ornate pattern of pink flowers, orange dots and paisley on deep green
+Yellow Cross Patty Embroidered Cotton|Folk embroidery of orange stepped diamonds and little red flowers on stems, with dashed white lines, on mustard
+Geometric Gold Embellished Silk|An ornate tile pattern of gold, cream and red medallions and flowers
+Block Print Mustard Silk|Hand-stamped flowers of teardrop petals around a dot, in rows
+Block Print Jade Silk|Hand-stamped flowers of teardrop petals around a dot, in rows
+Block Print Rubia Silk|Hand-stamped flowers of teardrop petals around a dot, in rows
+Green Swirling Serpent Cotton Print|Golden serpents coiling among leaves and lilies on dark green
+Blue Floral Embroidered Cotton|White daisies and small red rosebuds scattered on sky blue
+Green Cross Patty Embroidered Cotton|Folk embroidery of red stepped diamonds and little flowers on stems, with dashed white lines, on grass green
+Houndstooth Cool Brown|Brown, grey and beige houndstooth check
+Teal Birdsong Velvet|Golden birds among leafy branches and flowers on teal
+Lucky Day Cotton Print|Large four-leaf clovers and flowers in soft greens, peach and teal
+Galaxy Gradient Sequins|Fades from near black through steel blue to deep red
+Magenta Floral Cotton Block Print|Pink leaves and berry-like flowers on deep plum
+Forest Geometric Floral Velvet|Sage green stylised lilies and flowers in rows on deep forest green
+Lavender Field Gradient Silk|Fades from teal through soft blue to lavender
+Rows of Purple Peonies Embroidered Cotton|Rows of embroidered purple peonies with teal leaves, on winding plum vines over grey
+Dijon Gingham Cotton|Mustard yellow and soft pink gingham check
+Multicoloured Floral Cotton|Small sage, blue and gold flowers and leaves scattered on cream
+Midnight and Silver Floral Cotton|Small flowers and trailing sprigs scattered all over, in silver on midnight
+Crimson and Gold Floral Cotton|Small flowers and trailing sprigs scattered all over, in gold on crimson
+Ebony and Gold Floral Cotton|Small flowers and trailing sprigs scattered all over, in gold on black
+Unicorn Gradient Silk|Fades from pink through lilac to soft aqua
+Black & White Polka Linen|White polka dots, spaced well apart, on black
+Daisy Ditsy Cotton|Coral and red daisies with leaves and little dots on chocolate brown
+Paisley Plum Silk Brocade|A brocade of swirling paisley and curls in lilac and cream
+Paisley Emerald Silk Brocade|A brocade of swirling paisley and curls in green and cream
+Nadine Autumn Floral|Small peach flowers and green sprigs in trellis rows on rust red
+Dark Floral Classic Silk|Cream scrolling leaves and curls on dark gold-brown
+Teal Embroidered Diamond Cotton|Pale embroidery of diamonds, flowers and twisted cords on teal
+Mauve Birdsong Velvet|Blue birds among leafy branches and flowers on deep mauve
+Bloom Geometric Floral Velvet|Dusky pink stylised lilies and flowers in rows on deep plum
+Rhubarb & Custard Cotton Check|Rhubarb red and custard yellow check
+Geometric Green Embellished Silk|An ornate tile pattern of olive green, red and cream medallions
+Ember Gradient Silk|Fades from near black to glowing rust orange
+Sunset Botanicals Cotton|Dense golden flowers and curling leaves on burnt orange
+Nadine Winter Floral|Small pink flowers and teal sprigs in trellis rows on mint
+Viviene Floral Silk Brocade|Small red flowers and green leaves on a cream crackle background
+Paisley Yellow Silk|Large, swirling paisley in golden yellows
+White Hydrangea Cotton Print|Hydrangea heads, long leaves and small orange flowers on a linen-textured background
+Blue Hydrangea Cotton Print|Hydrangea heads, long leaves and small orange flowers on a linen-textured background
+Beach Bliss Gradient Sequins|Fades from golden yellow through peach to coral red
+Sunshine Diamond Cotton Print|Little pointed leaves arranged in open diamond rings, spaced over the background
+Violet Diamond Cotton Print|Little pointed leaves arranged in open diamond rings, spaced over the background
+Verdent Diamond Cotton Print|Little pointed leaves arranged in open diamond rings, spaced over the background
+Blue Dainty Continuous Floral|Golden trailing vines with small leaves and flowers on mid blue
+Solar Flare Shimmer Silk|An iridescent silk whose colour shimmers and shifts
+Cosmos Shimmer Silk|An iridescent silk whose colour shimmers and shifts
+Nadine Summer Floral|Small orange and blue flowers and green sprigs in trellis rows on cream
+Winter Vine Border Printed Cotton|Plain dusky lilac, with bands of blue and green vines along the edges
+Victorian Cotton Print|Pale blue fleurs-de-lis and small lilac flowers inside a turquoise trellis, on white
+Geometric Purple Embellished Silk|An ornate tile pattern of purple, magenta and olive medallions
+Amber Birdsong Velvet|Rust birds among leafy branches and flowers on amber gold
+Spring Vine Border Printed Cotton|Plain soft mint, with bands of pink and green vines along the edges
+Ebony Lace|Lace of fan-shaped flowers and medallions in rows, over a fine net
+Brown Wool Pinstripes|Warm brown wool with fine pinstripes
+Lace on Red Silk|Lace of fan-shaped flowers, medallions and leaves over silk
+Lace on Pink Silk|Lace of fan-shaped flowers, medallions and leaves over silk
+Savannah Floral Linen|Large tan flowers and curling leaves on terracotta
+Pink Hydrangea Cotton Print|Pink hydrangea heads, long leaves and small flowers on a soft pink linen-textured background
+Black Plaid|Black tartan with fine lines of plum and taupe
+French Floral Black Lace|Lace of large flowers and curling leaves over a fine net
+Polka Mushroom Cap Velvet|Small white polka dots on red, like a toadstool cap
+Ivory Lace|Lace of large flowers and curling leaves over a fine net
+Mustard Lace|Lace of large flowers and curling leaves over a fine net
+Forest Green Lace|Lace of large flowers and curling leaves over a fine net
+Brilliant Red Lace|Lace of large flowers and curling leaves over a fine net
+Brilliant Pink Lace|Lace of large flowers and curling leaves over a fine net
+Purple Floral Cotton|Sage green and gold flowers and leaves on dusky purple
+Sky Gingham Cotton|Sky blue, grey and sand gingham check
+Galaxy Shimmer Silk|An iridescent silk whose colour shimmers and shifts
+Houndstooth Black|Black and charcoal houndstooth check
+Blue Wool Pinstripes|Greyish blue wool with fine pinstripes
+Bronze Rhiannon Linen|Fine bronze trailing flowers and branches on sandy beige
+Mirage Crushed Velvet|Crushed velvet in mottled patches of orange, rust, blue and grey
+Siren Velvet|Crushed velvet in mottled patches of blue, green and purple
+Nadine Spring Floral|Small yellow and blue flowers and coral sprigs in trellis rows on peach
+Starry Night Velvet|Gold stars and twinkles of different sizes on dark navy
+Mermaid Dream Gradient Sequins|Fades from dusky mauve to grey-green
+Grey Argyle|Argyle diamonds in charcoal and black, crossed by thin olive lines
+White Floral Embroidered Silk|Embroidered with roses, small flowers and leaves all over
+Pink Floral Embroidered Silk|Embroidered with roses, small flowers and leaves all over
+Yellow Floral Embroidered Silk|Embroidered with roses, small flowers and leaves all over
+Black Floral Embroidered Silk|Embroidered with roses, small flowers and leaves all over
+Linen Poppy Print|Pink poppies among long green leaves on pale green linen
+Ice Floral Silk Brocade|Large ivory flowers and sprigs on icy grey-blue
+Cotton Abstract Pastel Splashes|Painterly streaks and splashes of pink, lilac and aqua
+Floral Pastel Cotton|Small pastel flowers in yellow, pink and sage on cream
+Royal Purple and Orange Technicolour Velvet|Velvet in mottled, blended patches of purple, magenta and orange
+Shooting Star Sequins|Rows of round sequins in pastel pink, yellow and blue
+Purple Floral Burnout Velvet|Burnout velvet: an ornate pattern of purple flowers, orange scrolls and dots on charcoal
+Pink Plaid Cotton|Soft pink plaid of wide and narrow stripes on pale blush
+Snow Petal Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Purple Petal Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Teal Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Subdued Purple Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Subdued Blue Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Silver Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Pastel Yellow Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Pastel Purple Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Pastel Pink Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Pastel Blue Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Gold Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Dusty Pink Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Bronze Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Absynthe Lace|Lace of roses, little flowers and leafy sprigs over a fine net
+Pink Carnation Print Silk|A large white damask of carnations and scrolls on soft pink
+Strawberry Fields Cotton Print|Strawberries, flowers and curling vines, tone on tone, on bright coral red
+Blossoming Blanc Embellished Velvet|Beaded paisleys and tiny flowers in taupe and pink on pale grey
+Elegant Plum Foliage Cotton|Small dark leaves, vines and cream berries on plum
+Violet Diamond Filigree Silk|A tone-on-tone filigree of leafy scrolls and flower shapes
+Magenta Diamond Filigree Silk|A tone-on-tone filigree of leafy scrolls and flower shapes
+Crimson Diamond Filigree Silk|A tone-on-tone filigree of leafy scrolls and flower shapes
+Teal Diamond Filigree Silk|A tone-on-tone filigree of leafy scrolls and flower shapes
+Green Leaf Print Silk|Dense long leaves in olive, gold and green
+Scarab Shimmer Silk|An iridescent silk whose colour shimmers and shifts
+Blushing Skies Shimmer Silk|An iridescent silk whose colour shimmers and shifts
+Lime Technicolour Velvet|Velvet in mottled, blended patches of lime green, teal and gold
+Purple Dainty Continuous Floral|Pale trailing vines with small leaves and flowers, tone on tone
+Pink Dainty Continuous Floral|Pale trailing vines with small leaves and flowers, tone on tone
+Beige Dainty Continuous Floral|Pale cream trailing vines with small leaves and flowers on beige
+Victorian Cedar Relief Linen|A raised trellis of ogee shapes and little fleurs, in copper on dark brown
+Victorian Mahogany Relief Linen|A raised trellis of ogee shapes and little fleurs, in copper on dark brown
+Ocean Hibiscus Silk|Large overlapping hibiscus petals in royal and navy blue
+Olive Rectangle Print|Small soft rectangles and diamonds in rows on olive green
+Bridget Silk Brocade|A brocade of curling white vines and feathery leaves, tone on tone
+Starry Night Blue Velvet|Gold stars and twinkles of different sizes on navy blue
+Teal Leaf Print Silk|Dense long leaves in teal, olive and brown
+Sunset Hibiscus Silk|Large overlapping hibiscus petals in gold and orange, outlined in red
+Starry Scarlet Velvet|Gold stars and twinkles of different sizes on dark scarlet brown
+Blush Cotton Dots|Small four-petal flower dots, spaced well apart
+Khaki Cotton Dots|Small four-petal flower dots, spaced well apart
+Steel Blue Cotton Dots|Small four-petal flower dots, spaced well apart
+Red Dots Cotton|Small four-petal flower dots, spaced well apart

@@ -170,6 +170,11 @@ namespace DressmakerAccess
             if (d.collarDefinition == null || d.collarDefinition.GetVariant(d.collarVariant).panels.Count == 0)
                 lines.Add("No collar.");
 
+            var looks = (d.panelStates ?? new List<PanelState>()).Select(p => p.fabric).Where(f => f != null).Distinct()
+                .Where(f => FabricLook(f).Length > 0).Select(f => f.PrettyName + ": " + FabricLook(f)).ToList();
+            if (looks.Count > 0)
+                lines.Add("The fabrics: " + string.Join(". ", looks) + ".");
+
             var acc = (d.accessoryStates ?? new List<AccessoryItemState>()).Where(a => a.placed && a.definition != null).ToList();
             if (acc.Count == 0)
                 lines.Add("No accessories.");
@@ -186,6 +191,10 @@ namespace DressmakerAccess
             }
             return lines;
         }
+
+        /// <summary>What a patterned fabric looks like (from its texture), or "" for plain ones whose name says it all.</summary>
+        internal static string FabricLook(Fabric f)
+            => f != null && FabricLooks.Looks.TryGetValue(f.name, out string s) ? s : "";
 
         private static string FabricWords(Fabric f)
         {

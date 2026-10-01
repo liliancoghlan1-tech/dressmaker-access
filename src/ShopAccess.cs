@@ -150,6 +150,8 @@ namespace DressmakerAccess
                 sb.Append(f.PrettyName);
                 if (f.fabricType != null && !f.PrettyName.ToLowerInvariant().Contains(f.fabricType.PrettyName.ToLowerInvariant()))
                     sb.Append(", ").Append(f.fabricType.PrettyName);
+                string look = DressInfo.FabricLook(f);
+                if (look.Length > 0) sb.Append(". ").Append(look);
                 sb.Append($", {f.cost} gold a metre");
                 string styles = Styles(f.tagWeights, brief ? 3 : 20);
                 if (styles.Length > 0) sb.Append(". ").Append(styles);

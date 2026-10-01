@@ -111,6 +111,11 @@ ones your client wants first); the last item closes the list.
 Fabrics in the sidebar: Enter puts a swatch on the sketch so its styles
 count in the estimate. T reads how your design meets the client's
 wishes. Draft Pattern finishes the design.
+Every bodice, skirt, sleeve and collar says what it looks like (written
+from the game's own sketches; skirts also say their length, from above
+the knee to floor length). Patterned fabrics say what the print is, in
+the shop, the sidebar and on finished dresses; plain ones are named by
+their colour already.
 Many bodices, skirts, sleeves and collars come in two to four styles
 (the game only shows dots). Each style says how it differs, for
 example "style 2 of 2: adds a waistband" or "mirrored".
