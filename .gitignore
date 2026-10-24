@@ -5,3 +5,5 @@ release/Dressmaker-Access/files/
 release/*.zip
 tools/*.py
 *.log
+
+src/out-update/

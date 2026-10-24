@@ -680,10 +680,10 @@ namespace DressmakerAccess
 
         // ---------- hooks ----------
 
-        [HarmonyPatch(typeof(CuttingRoom), nameof(CuttingRoom.PanLeft))]
+        [HarmonyPatch(typeof(CuttingRoom), nameof(CuttingRoom.PanLeft), new System.Type[0])]
         private static class PanLeftPatch { private static bool Prefix() => _arrowFrame != Time.frameCount; }
 
-        [HarmonyPatch(typeof(CuttingRoom), nameof(CuttingRoom.PanRight))]
+        [HarmonyPatch(typeof(CuttingRoom), nameof(CuttingRoom.PanRight), new System.Type[0])]
         private static class PanRightPatch { private static bool Prefix() => _arrowFrame != Time.frameCount; }
 
         [HarmonyPatch(typeof(CuttingRoom), nameof(CuttingRoom.UpdateDisplayedFabric))]

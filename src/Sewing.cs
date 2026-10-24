@@ -37,9 +37,6 @@ namespace DressmakerAccess
             AccessTools.FieldRefAccess<SewingController, int>("mistakes");
         private static readonly AccessTools.FieldRef<SewingController, SewingSpeedControl> SpeedControl =
             AccessTools.FieldRefAccess<SewingController, SewingSpeedControl>("speedControl");
-        private static readonly AccessTools.FieldRef<SewingController, bool> ShowingNote =
-            AccessTools.FieldRefAccess<SewingController, bool>("_isShowingNote");
-
         private static readonly System.Reflection.MethodInfo ClosestPoint =
             AccessTools.Method(typeof(SewingController), "ClosestPointOnPatternLine");
         private static readonly System.Reflection.MethodInfo AssistTarget =
@@ -309,18 +306,5 @@ namespace DressmakerAccess
             Speech.Say(Plugin.SteeringTone.Value ? "Steering hum on." : "Steering hum off.");
         }
 
-        /// <summary>The sewing note (tutorial paper) waits for a real mouse click; Enter closes it.</summary>
-        internal static bool TryCloseNote()
-        {
-            var gm = Rooms.GameManagerOrNull();
-            if (gm == null || gm.CurrentScene != GameManager.Scene.Sewing)
-                return false;
-            SewingController c;
-            try { c = SingletonBehaviour<SewingController>.Instance; } catch { return false; }
-            if (c == null || !c.isActiveAndEnabled || !ShowingNote(c))
-                return false;
-            c.HideNote();
-            return true;
-        }
     }
 }

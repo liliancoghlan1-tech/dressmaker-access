@@ -1,12 +1,15 @@
 ====================================================================
  DRESSMAKER ACCESS  -  play Dressmaker with a screen reader
- Version 0.9.2 (beta)
+ Version 0.9.5 (beta)
 ====================================================================
 
 An unofficial accessibility mod for Dressmaker (Steam) that makes the
 whole dressmaking loop playable by ear with NVDA: talking to clients,
 measuring, designing, buying fabric, cutting, sewing, accessories, and
 handing the dress over.
+
+Version 0.9.5 restores compatibility with the October game update
+(tested with Steam build 26043449) and names the new options toggles.
 
 It is a BETA. The main game works from start to a finished, delivered
 dress, and it has been played that way by a blind player. Some side

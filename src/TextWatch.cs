@@ -14,7 +14,6 @@ namespace DressmakerAccess
     /// </summary>
     internal static class TextWatch
     {
-        private static readonly Dictionary<int, string> _spokenBoxes = new Dictionary<int, string>();
         private static float _nextScan;
 
         private static readonly HashSet<int> _openPopups = new HashSet<int>();
@@ -81,23 +80,6 @@ namespace DressmakerAccess
                 Speech.Queue("You've unlocked something new! Press Enter to see it.");
             _catcherAnnounced = waiting;
 
-            // TextBox = the game's big story/intro panels. They type out; read them whole.
-            foreach (TextBox box in Object.FindObjectsByType<TextBox>(FindObjectsSortMode.None))
-            {
-                if (!box.isActiveAndEnabled)
-                    continue;
-                var tmp = Traverse.Create(box).Field("typewriterText").GetValue<TextMeshProUGUI>();
-                if (tmp == null)
-                    continue;
-                string text = Speech.Clean(tmp.text);
-                if (string.IsNullOrEmpty(text))
-                    continue;
-                int id = box.GetInstanceID();
-                if (_spokenBoxes.TryGetValue(id, out string said) && said == text)
-                    continue;
-                _spokenBoxes[id] = text;
-                Speech.Say(text + " Press Space to continue.");
-            }
         }
 
         /// <summary>F4: read every piece of visible text on the screen, top to bottom.</summary>

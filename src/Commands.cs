@@ -106,8 +106,6 @@ namespace DressmakerAccess
                 case "details": Keys.RoomDetails(); break;
                 case "line": Measuring.CmdLine(int.Parse(a[1])); break;
                 case "boxes":
-                    foreach (TextBox tb in UnityEngine.Object.FindObjectsByType<TextBox>(FindObjectsSortMode.None))
-                        Plugin.Log.LogInfo($"[boxes] {UINav.Path(tb.gameObject)} activeAndEnabled={tb.isActiveAndEnabled}");
                     var es = UnityEngine.EventSystems.EventSystem.current;
                     Plugin.Log.LogInfo($"[boxes] eventsystem selected={(es != null && es.currentSelectedGameObject != null ? UINav.Path(es.currentSelectedGameObject) : "none")} nav={(es != null && es.sendNavigationEvents)}");
                     break;

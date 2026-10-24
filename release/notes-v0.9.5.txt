@@ -1,0 +1,10 @@
+Restores compatibility with the October Dressmaker update (Steam build 26043449).
+
+- Fixes the startup failure caused by changes to the cutting controls.
+- Updates accessory selection to work with the new game code.
+- Removes obsolete introduction and sewing-note hooks; current tutorial messages continue to use the mod's speech and Enter controls.
+- Names the new Fast Trim Placement, Less Animation, Outlines and Bloom options.
+
+Checked startup, save loading, room and menu navigation, cutting, and accessory placement. Lilian also confirmed the installed repair is working again. A complete commission and all side screens have not been retested on this update.
+
+Install or update: close Dressmaker, download Dressmaker-Access.zip, extract it, and run Install.bat. Then start NVDA and launch the game normally. Saves are not changed by the installer.

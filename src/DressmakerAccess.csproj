@@ -4,13 +4,13 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>DressmakerAccess</AssemblyName>
     <Product>Dressmaker Accessibility</Product>
-    <Version>0.9.4</Version>
+    <Version>0.9.5</Version>
     <LangVersion>latest</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Nullable>disable</Nullable>
-    <!-- Build against the TEST copy; it is byte-identical to her install plus BepInEx -->
-    <GameDir>C:\Users\hp\DressmakerTest</GameDir>
+    <!-- Default to the updated installed game; override GameDir for another build. -->
+    <GameDir Condition="'$(GameDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Dressmaker</GameDir>
     <ManagedDir>$(GameDir)\Dressmaker_Data\Managed</ManagedDir>
   </PropertyGroup>
 

@@ -30,11 +30,6 @@ namespace DressmakerAccess
             Sketchbook b = Sketch.Book;
             if (b == null)
                 return false;
-            if (SingletonBehaviour<GameManager>.Instance.isInIntro)
-            {
-                Speech.Say("The other pages open after the introduction.");
-                return true;
-            }
             if (b.garmentComponentSelectionUI.gameObject.activeInHierarchy)
             {
                 Speech.Say("Close the list first.");

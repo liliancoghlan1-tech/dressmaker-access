@@ -117,6 +117,14 @@ namespace DressmakerAccess
                 return "Sewing assist: the machine steers each seam for you, " + on + ". F5 also switches it";
             if (t != null && t == pm.rotationGizmoToggle)
                 return "Accessory rotation handle: a mouse handle for turning accessories on the dress; the mod doesn't need it, " + on;
+            if (t != null && t == pm.fastTrimPlacementToggle)
+                return "Fast trim placement, " + on;
+            if (t != null && t == pm.lessAnimationToggle)
+                return "Less animation, " + on;
+            if (t != null && t == pm.outlineToggle)
+                return "Outlines, " + on;
+            if (t != null && t == pm.bloomToggle)
+                return "Bloom, " + on;
             // Arrow pairs: .../<Row>/Options/(Left|Right)
             if ((go.name == "Left" || go.name == "Right") && go.transform.parent != null && go.transform.parent.parent != null)
             {

@@ -21,12 +21,13 @@ namespace DressmakerAccess
     /// </summary>
     internal static class AccessoryAccess
     {
-        private static readonly AccessTools.FieldRef<AccessoryPlacementController, AccessoryItem> Selected =
-            AccessTools.FieldRefAccess<AccessoryPlacementController, AccessoryItem>("selectedItem");
+        private static AccessoryItem Selected(AccessoryPlacementController controller) => controller.SelectedItem;
+        private static void SetSelected(AccessoryPlacementController controller, AccessoryItem item)
+            => Traverse.Create(controller).Property("selectedItem").SetValue(item);
+        private static void SetMode(AccessoryPlacementController controller, AccessoryPlacementController.PlacementMode mode)
+            => Traverse.Create(controller).Property("mode").SetValue(mode);
         private static readonly AccessTools.FieldRef<AccessoryPlacementController, bool> OnSurface =
             AccessTools.FieldRefAccess<AccessoryPlacementController, bool>("onSurface");
-        private static readonly AccessTools.FieldRef<AccessoryPlacementController, AccessoryPlacementController.PlacementMode> ModeField =
-            AccessTools.FieldRefAccess<AccessoryPlacementController, AccessoryPlacementController.PlacementMode>("mode");
         private static readonly System.Reflection.MethodInfo Consume = AccessTools.Method(typeof(AccessoryPlacementController), "ConsumeFromInventory");
         private static readonly System.Reflection.MethodInfo SelectItemM = AccessTools.Method(typeof(AccessoryPlacementController), "SelectItem");
         private static readonly System.Reflection.MethodInfo DeselectM = AccessTools.Method(typeof(AccessoryPlacementController), "DeselectItem");
@@ -147,13 +148,13 @@ namespace DressmakerAccess
             else if (c.Mode == AccessoryPlacementController.PlacementMode.Selected && Selected(c) != null)
             {
                 AccessoryItem sel = Selected(c);
-                Add("Done with " + NameOf(sel), () => { DeselectM.Invoke(c, null); ModeField(c) = AccessoryPlacementController.PlacementMode.None; Speech.Say("Done."); });
+                Add("Done with " + NameOf(sel), () => { DeselectM.Invoke(c, null); SetMode(c, AccessoryPlacementController.PlacementMode.None); Speech.Say("Done."); });
                 if (!(sel is AccessoryItemPath))
                     Add("Remove " + NameOf(sel), () =>
                     {
                         DeselectM.Invoke(c, null);
                         DeleteSimple.Invoke(c, new object[] { sel });
-                        ModeField(c) = AccessoryPlacementController.PlacementMode.None;
+                        SetMode(c, AccessoryPlacementController.PlacementMode.None);
                         Speech.Say("Removed and back in the sidebar.");
                     });
             }
@@ -368,8 +369,8 @@ namespace DressmakerAccess
                 return;
             }
             Consume.Invoke(c, new object[] { path, path.state.PathLength() });
-            Selected(c) = null;
-            ModeField(c) = AccessoryPlacementController.PlacementMode.None;
+            SetSelected(c, null);
+            SetMode(c, AccessoryPlacementController.PlacementMode.None);
             c.usageLabel.Hide();
             SingletonBehaviour<MannequinScene>.Instance.UpdateScores();
             bool partial = used + 0.001f < r.length;

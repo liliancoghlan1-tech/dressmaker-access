@@ -118,8 +118,6 @@ namespace DressmakerAccess
 
         private static void Enter()
         {
-            if (Sewing.TryCloseNote())
-                return;
             if (TryCloseTip())
                 return;
             if (Letters.TryEnter())
@@ -140,8 +138,6 @@ namespace DressmakerAccess
                 Dialogue.Advance();
                 return;
             }
-            if (TryAdvanceTextBox())
-                return;
             if (ShopAccess.TakeDownCurrent())
                 return;
             UINav.ActivateCurrent();
@@ -159,26 +155,6 @@ namespace DressmakerAccess
                     continue;
                 var btn = accept.GetComponentInChildren<UnityEngine.UI.Button>();
                 UINav.Click(btn != null ? btn.gameObject : accept);
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>Story boxes listen for Space or a mouse click; make Enter work too.</summary>
-        private static bool TryAdvanceTextBox()
-        {
-            foreach (TextBox box in Object.FindObjectsByType<TextBox>(FindObjectsSortMode.None))
-            {
-                if (!box.isActiveAndEnabled)
-                    continue;
-                var grp = Traverse.Create(box).Field("group").GetValue<CanvasGroup>();
-                if (grp != null && grp.alpha < 0.05f)
-                    continue;
-                var tw = Traverse.Create(box).Field("typewriter").GetValue<TypewriterByCharacter>();
-                if (tw != null && tw.isShowingText)
-                    tw.SkipTypewriter();
-                else
-                    Traverse.Create(box).Method("HideBox").GetValue();
                 return true;
             }
             return false;

@@ -2,7 +2,9 @@
 
 An unofficial screen-reader accessibility mod for **[Dressmaker](https://store.steampowered.com/app/4019220/Dressmaker/)** (Steam), so blind and low-vision players can run the whole shop by ear with **NVDA**.
 
-**Status: 0.9.1 beta.** The full loop has been played blind from start to a delivered dress: taking the commission, measuring the client, designing in the sketchbook, buying fabric, cutting, sewing, accessories, the photo, and handing it over. Some side screens are still untested; see *Not done yet*. Reports are very welcome.
+**Status: 0.9.5 beta.** The full loop has been played blind from start to a delivered dress: taking the commission, measuring the client, designing in the sketchbook, buying fabric, cutting, sewing, accessories, the photo, and handing it over. Some side screens are still untested; see *Not done yet*. Reports are very welcome.
+
+Version 0.9.5 restores compatibility with the October game update (tested with Steam build 26043449) and labels the new options toggles.
 
 ## Install
 
